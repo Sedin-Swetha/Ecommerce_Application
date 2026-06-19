@@ -18,5 +18,15 @@ export const defaultCategories = [
     id:"Furniture",
     name:"Furniture",
     image:"https://cdn-icons-png.flaticon.com/128/2148/2148573.png"
+  },
+   {
+    id:"Cookware",
+    name:"Cookware",
+    image:"https://cdn-icons-png.flaticon.com/128/5107/5107840.png",
+  },
+   {
+    id:"Beauty",
+    name:"Beauty",
+    image:"https://cdn-icons-png.flaticon.com/128/2025/2025489.png",
   }
 ];

@@ -25,7 +25,7 @@ export default function RegisterForm() {
         }
         try {
             registerUser(data);
-            router.push("/customer");
+            router.push("/products");
         } catch (error) {
             setError(
                 error instanceof Error
@@ -37,12 +37,9 @@ export default function RegisterForm() {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-5"
-        >
+            className="space-y-5">
             <div>
-                <h2 className="text-2xl font-bold">
-                    Create Account
-                </h2>
+                <h2 className="text-2xl font-bold">Create Account</h2>
                 <p className="text-sm text-gray-500">
                     Register to start shopping
                 </p>
@@ -53,8 +50,7 @@ export default function RegisterForm() {
                     placeholder="Enter your name"
                     {...register("name", {
                         required: "Name is required",
-                    })}
-                />
+                    })}/>
                 {errors.name && (
                     <p className="mt-1 text-sm text-red-500">
                         {errors.name.message}

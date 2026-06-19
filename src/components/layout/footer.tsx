@@ -23,12 +23,12 @@ export default function Footer() {
                         >
                             Products
                         </Link>
-                        <Link
+                        {/* <Link
                             href="/login"
                             className="transition hover:text-blue-400"
                         >
                             Login
-                        </Link>
+                        </Link> */}
                     </div>
                     <div>
                         <a

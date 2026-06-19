@@ -13,13 +13,9 @@ export default function LoginForm() {
     const { login } = useAuth();
     const [error, setError] = useState("");
     const {
-        register,
-        handleSubmit,
-        formState: { errors, isSubmitting },
-    } = useForm<LoginInput>();
-    const onSubmit = async (
-        data: LoginInput
-    ) => {
+        register,handleSubmit,formState: { errors, isSubmitting }, } = useForm<LoginInput>();
+        const onSubmit = async (
+        data: LoginInput) => {
         setError("");
         const validationError =
             validateLogin(data);
@@ -28,15 +24,14 @@ export default function LoginForm() {
             return;
         }
         try {
-            const authenticatedUser =
-                login(data);
+            const authenticatedUser =login(data);
             if (
                 authenticatedUser.role ===
                 UserRole.ADMIN
             ) {
                 router.push("/admin");
             } else {
-                router.push("/customer");
+                router.push("/products");
             }
         } catch (error) {
             setError(
@@ -49,21 +44,10 @@ export default function LoginForm() {
     return (
         <div className="flex min-h-[80vh] items-center justify-center px-4">
             <div
-                className="
-          w-full
-          max-w-md
-          rounded-2xl
-          border
-          border-gray-200
-          bg-white
-          p-8
-          shadow-lg
-        "
-            >
+                className="w-full max-w-md rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="space-y-5"
-                >
+                    className="space-y-5">
                     <div className="text-center">
                         <h2 className="text-3xl font-bold text-gray-900">
                             Welcome Back
@@ -78,10 +62,8 @@ export default function LoginForm() {
                             type="email"
                             placeholder="Enter your email"
                             {...register("email", {
-                                required:
-                                    "Email is required",
-                            })}
-                        />
+                                required:"Email is required",
+                            })} />
                         {errors.email && (
                             <p className="mt-1 text-sm text-red-500">
                                 {errors.email.message}
@@ -94,8 +76,7 @@ export default function LoginForm() {
                             type="password"
                             placeholder="Enter your password"
                             {...register("password", {
-                                required:
-                                    "Password is required",
+                                required:"Password is required",
                             })}
                         />
                         {errors.password && (
@@ -105,22 +86,13 @@ export default function LoginForm() {
                         )}
                     </div>
                     {error && (
-                        <div
-                            className="
-                rounded-lg
-                bg-red-50
-                p-3
-                text-sm
-                text-red-600
-              "
-                        >
-                            {error}
+                        <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600">
+                           {error}
                         </div>
                     )}
                     <Button
                         type="submit"
-                        disabled={isSubmitting}
-                    >
+                        disabled={isSubmitting}>
                         {isSubmitting
                             ? "Signing In..."
                             : "Login"}
