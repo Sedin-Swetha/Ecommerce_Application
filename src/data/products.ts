@@ -1,64 +1,331 @@
-import { Product } from "@/types/product";
-
 export const defaultProducts: Product[] = [
   {
-    id: "PRD001", name: "iPhone 15 Pro", description: "Apple's latest flagship with A17 Pro chip, titanium design, and pro camera system.", categoryId: "CAT001", brand: "Apple", price: 134900, discount: 5, stock: 20, rating: 4.8, images: ["https://picsum.photos/seed/iphone15/600/600"], isFeatured: true, createdAt: "2025-01-01T00:00:00.000Z",
+    id: "PRD001",
+    name: "iPhone 15 Pro",
+    description: "Apple flagship smartphone.",
+    categoryId: "electronics",
+    brand: "Apple",
+    price: 134900,
+    discount: 5,
+    stock: 20,
+    rating: 4.8,
+    images: [
+      "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800"
+    ],
+    isFeatured: true,
+    createdAt: "2025-01-01",
+  },
+
+  {
+    id: "PRD002",
+    name: "Samsung Galaxy S24 Ultra",
+    description: "Premium Android flagship.",
+    categoryId: "electronics",
+    brand: "Samsung",
+    price: 129999,
+    discount: 10,
+    stock: 15,
+    rating: 4.7,
+    images: [
+      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=800"
+    ],
+    isFeatured: true,
+    createdAt: "2025-01-02",
+  },
+
+  {
+    id: "PRD003",
+    name: "Sony WH-1000XM5",
+    description: "Wireless noise cancelling headphones.",
+    categoryId: "electronics",
+    brand: "Sony",
+    price: 29990,
+    discount: 15,
+    stock: 30,
+    rating: 4.9,
+    images: [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800"
+    ],
+    isFeatured: true,
+    createdAt: "2025-01-03",
+  },
+
+  {
+    id: "PRD004",
+    name: "MacBook Air M3",
+    description: "Apple M3 powered laptop.",
+    categoryId: "electronics",
+    brand: "Apple",
+    price: 114900,
+    discount: 0,
+    stock: 12,
+    rating: 4.9,
+    images: [
+      "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?w=800"
+    ],
+    isFeatured: true,
+    createdAt: "2025-01-04",
+  },
+
+  {
+    id: "PRD005",
+    name: "Men's Classic Polo T-Shirt",
+    description: "Premium cotton polo t-shirt.",
+    categoryId: "fashion",
+    brand: "H&M",
+    price: 999,
+    discount: 20,
+    stock: 100,
+    rating: 4.3,
+    images: [
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800"
+    ],
+    isFeatured: false,
+    createdAt: "2025-01-05",
+  },
+
+  {
+    id: "PRD006",
+    name: "Women's Floral Kurti",
+    description: "Comfortable ethnic wear.",
+    categoryId: "fashion",
+    brand: "FabIndia",
+    price: 1299,
+    discount: 25,
+    stock: 80,
+    rating: 4.5,
+    images: [
+      "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=800"
+    ],
+    isFeatured: false,
+    createdAt: "2025-01-06",
+  },
+
+  {
+    id: "PRD007",
+    name: "Modern Wooden Sofa",
+    description: "Luxury wooden sofa set.",
+    categoryId: "furniture",
+    brand: "IKEA",
+    price: 25999,
+    discount: 18,
+    stock: 8,
+    rating: 4.6,
+    images: [
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800"
+    ],
+    isFeatured: true,
+    createdAt: "2025-01-07",
+  },
+
+  {
+    id: "PRD008",
+    name: "Dining Table Set",
+    description: "6-seater wooden dining table.",
+    categoryId: "furniture",
+    brand: "Home Centre",
+    price: 18999,
+    discount: 12,
+    stock: 10,
+    rating: 4.4,
+    images: [
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800"
+    ],
+    isFeatured: false,
+    createdAt: "2025-01-08",
+  },
+
+  {
+    id: "PRD009",
+    name: "Pressure Cooker 5L",
+    description: "Stainless steel cooker.",
+    categoryId: "cookware",
+    brand: "Prestige",
+    price: 2499,
+    discount: 15,
+    stock: 40,
+    rating: 4.5,
+    images: [
+      "https://images.unsplash.com/photo-1585515656953-8f95e1b4d4a0?w=800"
+    ],
+    isFeatured: false,
+    createdAt: "2025-01-09",
+  },
+
+  {
+    id: "PRD010",
+    name: "Non-Stick Cookware Set",
+    description: "10-piece cookware combo.",
+    categoryId: "cookware",
+    brand: "Pigeon",
+    price: 3999,
+    discount: 20,
+    stock: 25,
+    rating: 4.4,
+    images: [
+      "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800"
+    ],
+    isFeatured: true,
+    createdAt: "2025-01-10",
   },
   {
-    id: "PRD002", name: "Samsung Galaxy S24 Ultra", description: "Flagship Android phone with built-in S Pen and 200MP camera.", categoryId: "CAT001", brand: "Samsung", price: 129999, discount: 10, stock: 15, rating: 4.7, images: ["https://picsum.photos/seed/galaxys24/600/600"], isFeatured: true, createdAt: "2025-01-02T00:00:00.000Z",
-  },
-  {
-    id: "PRD003", name: "Sony WH-1000XM5", description: "Industry-leading noise cancelling headphones with 30-hour battery.", categoryId: "CAT001", brand: "Sony", price: 29990, discount: 15, stock: 30, rating: 4.9, images: ["https://picsum.photos/seed/sonyxm5/600/600"], isFeatured: true, createdAt: "2025-01-03T00:00:00.000Z",
-  },
-  {
-    id: "PRD004", name: "MacBook Air M3", description: "Ultra-thin laptop powered by Apple M3 chip with 18-hour battery life.", categoryId: "CAT001", brand: "Apple", price: 114900, discount: 0, stock: 12, rating: 4.9, images: ["https://picsum.photos/seed/macbookm3/600/600"], isFeatured: true, createdAt: "2025-01-04T00:00:00.000Z",
-  },
-  {
-    id: "PRD005", name: "Men's Classic Polo T-Shirt", description: "100% cotton premium polo shirt, perfect for casual and semi-formal occasions.", categoryId: "CAT002", brand: "H&M", price: 999, discount: 20, stock: 100, rating: 4.3, images: ["https://picsum.photos/seed/poloshirt/600/600"], isFeatured: false, createdAt: "2025-01-05T00:00:00.000Z",
-  },
-  {
-    id: "PRD006", name: "Women's Floral Kurti", description: "Elegant floral print kurti in soft rayon fabric.", categoryId: "CAT002", brand: "FabIndia", price: 1299, discount: 25, stock: 80, rating: 4.5, images: ["https://picsum.photos/seed/kurti/600/600"], isFeatured: false, createdAt: "2025-01-06T00:00:00.000Z",
-  },
-  {
-    id: "PRD007", name: "Atomic Habits", description: "An Easy & Proven Way to Build Good Habits & Break Bad Ones by James Clear.", categoryId: "CAT003", brand: "Penguin", price: 399, discount: 30, stock: 200, rating: 4.8, images: ["https://picsum.photos/seed/atomichabits/600/600"], isFeatured: true, createdAt: "2025-01-07T00:00:00.000Z",
-  },
-  {
-    id: "PRD008", name: "The Alchemist", description: "Paulo Coelho's masterpiece about following your dreams.", categoryId: "CAT003", brand: "HarperCollins", price: 299, discount: 20, stock: 150, rating: 4.7, images: ["https://picsum.photos/seed/alchemist/600/600"], isFeatured: false, createdAt: "2025-01-08T00:00:00.000Z",
-  },
-  {
-    id: "PRD009", name: "Instant Pot Duo 7-in-1", description: "7-in-1 electric pressure cooker that replaces 7 kitchen appliances.", categoryId: "CAT004", brand: "Instant Pot", price: 8999, discount: 12, stock: 40, rating: 4.6, images: ["https://picsum.photos/seed/instantpot/600/600"], isFeatured: false, createdAt: "2025-01-09T00:00:00.000Z",
-  },
-  {
-    id: "PRD010", name: "Philips Air Fryer", description: "Rapid Air technology for healthy cooking with 80% less fat.", categoryId: "CAT004", brand: "Philips", price: 7499, discount: 18, stock: 25, rating: 4.5, images: ["https://picsum.photos/seed/airfryer/600/600"], isFeatured: true, createdAt: "2025-01-10T00:00:00.000Z",
-  },
-  {
-    id: "PRD011", name: "Yoga Mat Premium", description: "6mm thick non-slip yoga mat with alignment lines. Eco-friendly TPE material.", categoryId: "CAT005", brand: "Boldfit", price: 799, discount: 10, stock: 60, rating: 4.4, images: ["https://picsum.photos/seed/yogamat/600/600"], isFeatured: false, createdAt: "2025-01-11T00:00:00.000Z",
-  },
-  {
-    id: "PRD012", name: "Dumbbell Set 20kg", description: "Adjustable dumbbell set for home gym. Solid cast iron construction.", categoryId: "CAT005", brand: "Kore", price: 2499, discount: 5, stock: 20, rating: 4.3, images: ["https://picsum.photos/seed/dumbbell/600/600"], isFeatured: false, createdAt: "2025-01-12T00:00:00.000Z",
-  },
-  {
-    id: "PRD013", name: "Maybelline Fit Me Foundation", description: "Lightweight, natural coverage foundation that matches your skin.", categoryId: "CAT006", brand: "Maybelline", price: 549, discount: 15, stock: 90, rating: 4.2, images: ["https://picsum.photos/seed/foundation/600/600"], isFeatured: false, createdAt: "2025-01-13T00:00:00.000Z",
-  },
-  {
-    id: "PRD014", name: "Lakme Rose Face Powder", description: "Translucent rose face powder for a natural, matte look.", categoryId: "CAT006", brand: "Lakme", price: 299, discount: 0, stock: 120, rating: 4.1, images: ["https://picsum.photos/seed/facepowder/600/600"], isFeatured: false, createdAt: "2025-01-14T00:00:00.000Z",
-  },
-  {
-    id: "PRD015", name: "LEGO Technic Formula E Car", description: "2022 Formula E Race Car building set with 422 pieces.", categoryId: "CAT007", brand: "LEGO", price: 4499, discount: 8, stock: 35, rating: 4.7, images: ["https://picsum.photos/seed/lego/600/600"], isFeatured: false, createdAt: "2025-01-15T00:00:00.000Z",
-  },
-  {
-    id: "PRD016", name: "Barbie Dreamhouse", description: "Massive 3-story dollhouse with elevator, pool, and 70+ accessories.", categoryId: "CAT007", brand: "Mattel", price: 6999, discount: 10, stock: 18, rating: 4.8, images: ["https://picsum.photos/seed/barbie/600/600"], isFeatured: true, createdAt: "2025-01-16T00:00:00.000Z",
-  },
-  {
-    id: "PRD017", name: "Tata Sampann Tur Dal 1kg", description: "High protein, unpolished toor dal with natural nutrients.", categoryId: "CAT008", brand: "Tata", price: 179, discount: 5, stock: 500, rating: 4.5, images: ["https://picsum.photos/seed/turdal/600/600"], isFeatured: false, createdAt: "2025-01-17T00:00:00.000Z",
-  },
-  {
-    id: "PRD018", name: "Basmati Rice Premium 5kg", description: "Extra long grain, aromatic basmati rice aged 2 years.", categoryId: "CAT008", brand: "India Gate", price: 699, discount: 0, stock: 300, rating: 4.6, images: ["https://picsum.photos/seed/basmatirice/600/600"], isFeatured: false, createdAt: "2025-01-18T00:00:00.000Z",
-  },
-  {
-    id: "PRD019", name: "OnePlus 12 5G", description: "Flagship killer with Snapdragon 8 Gen 3 and Hasselblad camera.", categoryId: "CAT001", brand: "OnePlus", price: 64999, discount: 8, stock: 22, rating: 4.6, images: ["https://picsum.photos/seed/oneplus12/600/600"], isFeatured: false, createdAt: "2025-01-19T00:00:00.000Z",
-  },
-  {
-    id: "PRD020", name: "Nike Air Max 270", description: "Casual sneakers with Max Air unit for all-day comfort.", categoryId: "CAT002", brand: "Nike", price: 12995, discount: 20, stock: 45, rating: 4.5, images: ["https://picsum.photos/seed/nikeairmax/600/600"], isFeatured: true, createdAt: "2025-01-20T00:00:00.000Z",
-  },
+  id: "PRD041",
+  name: "Sony PlayStation 5 Slim",
+  description: "Next-generation gaming console with ultra-fast SSD and stunning 4K gaming performance.",
+  categoryId: "CAT001",
+  brand: "Sony",
+  price: 54990,
+  discount: 8,
+  stock: 20,
+  rating: 4.9,
+  images: [
+    "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=800"
+  ],
+  isFeatured: true,
+  createdAt: "2025-02-10T00:00:00.000Z",
+},
+{
+  id: "PRD042",
+  name: "Canon EOS R50 Camera",
+  description: "Compact mirrorless camera with 4K recording and advanced autofocus.",
+  categoryId: "CAT001",
+  brand: "Canon",
+  price: 72999,
+  discount: 12,
+  stock: 15,
+  rating: 4.7,
+  images: [
+    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800"
+  ],
+  isFeatured: false,
+  createdAt: "2025-02-11T00:00:00.000Z",
+},
+{
+  id: "PRD043",
+  name: "Women's Running Shoes",
+  description: "Lightweight running shoes designed for comfort and daily training.",
+  categoryId: "CAT002",
+  brand: "Nike",
+  price: 4999,
+  discount: 18,
+  stock: 50,
+  rating: 4.5,
+  images: [
+    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800"
+  ],
+  isFeatured: true,
+  createdAt: "2025-02-12T00:00:00.000Z",
+},
+{
+  id: "PRD044",
+  name: "Wooden Study Table",
+  description: "Modern engineered wood study desk with storage compartments.",
+  categoryId: "CAT004",
+  brand: "IKEA",
+  price: 8999,
+  discount: 20,
+  stock: 18,
+  rating: 4.4,
+  images: [
+    "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800"
+  ],
+  isFeatured: false,
+  createdAt: "2025-02-13T00:00:00.000Z",
+},
+{
+  id: "PRD045",
+  name: "Stainless Steel Cookware Set",
+  description: "Premium 5-piece cookware set suitable for induction and gas stoves.",
+  categoryId: "CAT004",
+  brand: "Prestige",
+  price: 3999,
+  discount: 25,
+  stock: 70,
+  rating: 4.6,
+  images: [
+    "https://images.unsplash.com/photo-1584990347449-a823b0a4ec5e?w=800"
+  ],
+  isFeatured: false,
+  createdAt: "2025-02-14T00:00:00.000Z",
+},
+{
+  id: "PRD046",
+  name: "Smart Fitness Watch",
+  description: "Track steps, heart rate, sleep, and workouts with a vibrant AMOLED display.",
+  categoryId: "CAT005",
+  brand: "Amazfit",
+  price: 6999,
+  discount: 15,
+  stock: 35,
+  rating: 4.5,
+  images: [
+    "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800"
+  ],
+  isFeatured: true,
+  createdAt: "2025-02-15T00:00:00.000Z",
+},
+{
+  id: "PRD047",
+  name: "Vitamin C Face Serum",
+  description: "Brightening serum enriched with Vitamin C and Hyaluronic Acid.",
+  categoryId: "CAT006",
+  brand: "Minimalist",
+  price: 599,
+  discount: 10,
+  stock: 120,
+  rating: 4.7,
+  images: [
+    "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800"
+  ],
+  isFeatured: true,
+  createdAt: "2025-02-16T00:00:00.000Z",
+},
+{
+  id: "PRD048",
+  name: "Wireless Mechanical Keyboard",
+  description: "RGB backlit keyboard with hot-swappable switches and Bluetooth support.",
+  categoryId: "CAT001",
+  brand: "Keychron",
+  price: 8499,
+  discount: 10,
+  stock: 25,
+  rating: 4.8,
+  images: [
+    "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=800"
+  ],
+  isFeatured: false,
+  createdAt: "2025-02-17T00:00:00.000Z",
+},
+{
+  id: "PRD049",
+  name: "Organic Honey 500g",
+  description: "Pure natural honey sourced from certified organic farms.",
+  categoryId: "CAT008",
+  brand: "Dabur",
+  price: 349,
+  discount: 5,
+  stock: 200,
+  rating: 4.6,
+  images: [
+    "https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=800"
+  ],
+  isFeatured: false,
+  createdAt: "2025-02-18T00:00:00.000Z",
+},
+{
+  id: "PRD050",
+  name: "Gaming Chair Pro",
+  description: "Ergonomic gaming chair with adjustable armrests and lumbar support.",
+  categoryId: "CAT004",
+  brand: "Green Soul",
+  price: 12999,
+  discount: 22,
+  stock: 12,
+  rating: 4.7,
+  images: [
+    "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=800"
+  ],
+  isFeatured: true,
+  createdAt: "2025-02-19T00:00:00.000Z",
+}
 ];

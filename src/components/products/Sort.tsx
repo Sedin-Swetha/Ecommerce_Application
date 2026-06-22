@@ -2,7 +2,6 @@ interface Props {
   sortBy: string;
   onChange: (value: string) => void;
 }
-
 export default function SortDropdown({
   sortBy,
   onChange,

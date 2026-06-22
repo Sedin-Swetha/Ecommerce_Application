@@ -18,13 +18,7 @@ export default function ProductsPage() {
   const [showFilters, setShowFilters] =useState(false);
   const productsPerPage = 8;
   const filteredProducts =
-    filterProducts(defaultProducts, {
-      search,
-      category,
-      brand,
-      priceRange,
-      discount,
-    });
+  filterProducts(defaultProducts, {search,category,brand,priceRange,discount,});
   const sortedProducts =
     sortProducts(
       filteredProducts,
@@ -40,10 +34,7 @@ export default function ProductsPage() {
     discount,
     sortBy,
   ]);
-  const totalPages = Math.ceil(
-    sortedProducts.length /
-      productsPerPage
-  );
+  const totalPages = Math.ceil(sortedProducts.length /productsPerPage);
   const paginatedProducts =
     paginateProducts(
       sortedProducts,
