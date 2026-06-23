@@ -1,3 +1,4 @@
+import{ Product }from "@/types/product";
 export const defaultProducts: Product[] = [
   {
     id: "PRD001",
@@ -61,7 +62,7 @@ export const defaultProducts: Product[] = [
     stock: 12,
     rating: 4.9,
     images: [
-      "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?w=800"
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqYHrWhnRwqBsDG7rSl_viK_e_RFmWGN-iF4DZm0pLxg&s=10"
     ],
     isFeatured: true,
     createdAt: "2025-01-04",
@@ -146,7 +147,7 @@ export const defaultProducts: Product[] = [
     stock: 40,
     rating: 4.5,
     images: [
-      "https://images.unsplash.com/photo-1585515656953-8f95e1b4d4a0?w=800"
+      "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSgoli8gNzEMDTXX6kcVu_3Bvj0bhoFao3fxiB7A8VBeiSBZyJdspXBS72MBxW0u43h0IZZtWZOrS7rNqENAoEbDqImXoeyWb2eOrpJCzYIIk4Mztkr53rGAg&usqp=CAc"
     ],
     isFeatured: false,
     createdAt: "2025-01-09",
@@ -243,7 +244,7 @@ export const defaultProducts: Product[] = [
   stock: 70,
   rating: 4.6,
   images: [
-    "https://images.unsplash.com/photo-1584990347449-a823b0a4ec5e?w=800"
+    "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcS6aOhdzEb48j4vXiP6IDTlsx3WRbQ38UtlCP8z6a1wMiVyTtamKJYA9YnDUXAwigYZSHspui4MSuenCVfqNn1_5JLjc3zW&usqp=CAc"
   ],
   isFeatured: false,
   createdAt: "2025-02-14T00:00:00.000Z",

@@ -1,6 +1,8 @@
 "use client";
+import { useState, useEffect } from "react";
 import { Product } from "@/types/product";
 import { useCart } from "@/hooks/useCart";
+import WishlistButton from "@/components/wishlist/wishlistbutton";
 
 interface Props {
   product: Product;
@@ -8,7 +10,10 @@ interface Props {
 
 export default function ProductCard({ product }: Props) {
   const { addItem, increaseQuantity, decreaseQuantity, getQuantity } = useCart();
-  const quantity = getQuantity(product.id);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
+  const quantity = mounted ? getQuantity(product.id) : 0;
 
   const discountedPrice = Math.round(
     product.price - (product.price * product.discount) / 100
@@ -17,9 +22,10 @@ export default function ProductCard({ product }: Props) {
 
   return (
     <div className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 h-full">
-      
-      {/* Image — wide & short for square card feel */}
+
+      {/* Image */}
       <div className="relative w-full overflow-hidden bg-gray-50" style={{ paddingBottom: "55%" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={product.images[0]}
           alt={product.name}
@@ -30,6 +36,10 @@ export default function ProductCard({ product }: Props) {
             {product.discount}% OFF
           </span>
         )}
+        {/* Only render wishlist button after mount to avoid hydration mismatch */}
+        {mounted && (
+          <WishlistButton productId={product.id} className="absolute right-2 top-2" />
+        )}
         {product.stock === 0 && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/40">
             <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-gray-700">
@@ -39,25 +49,21 @@ export default function ProductCard({ product }: Props) {
         )}
       </div>
 
-      {/* Content — tight padding, minimal gaps */}
+      {/* Content */}
       <div className="flex flex-1 flex-col p-3 gap-1">
-        
         <p className="text-[10px] font-semibold uppercase tracking-widest text-blue-500 leading-none">
           {product.brand}
         </p>
-
         <h3
           className="line-clamp-2 text-sm font-semibold leading-tight text-gray-900"
           style={{ minHeight: "2.4rem" }}
         >
           {product.name}
         </h3>
-
         <span className="inline-flex w-fit items-center gap-0.5 rounded-md bg-green-600 px-1.5 py-0.5 text-[10px] font-medium text-white">
           ⭐ {product.rating}
         </span>
 
-        {/* Price row */}
         <div className="flex items-baseline gap-2 mt-0.5">
           <p className="text-lg font-bold text-gray-900 leading-none">
             ₹{discountedPrice.toLocaleString("en-IN")}
@@ -69,7 +75,6 @@ export default function ProductCard({ product }: Props) {
           )}
         </div>
 
-        {/* Save + Stock in one tight row */}
         <div className="flex items-center gap-2">
           {product.discount > 0 && (
             <span className="text-[11px] font-medium text-green-600">
@@ -83,7 +88,7 @@ export default function ProductCard({ product }: Props) {
           )}
         </div>
 
-        {/* CTA pinned to bottom */}
+        {/* CTA — always show "Add to Cart" on server, swap after mount */}
         <div className="mt-auto pt-2">
           {product.stock === 0 ? (
             <button
@@ -92,7 +97,7 @@ export default function ProductCard({ product }: Props) {
             >
               Out Of Stock
             </button>
-          ) : quantity === 0 ? (
+          ) : !mounted || quantity === 0 ? (
             <button
               onClick={(e) => { e.preventDefault(); addItem(product.id); }}
               className="w-full rounded-lg bg-blue-600 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 active:scale-95"

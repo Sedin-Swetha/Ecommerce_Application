@@ -1,22 +1,19 @@
-import {User} from "@/types/user";
-const SESSION_KEY ="currentUser";
-
-export const saveSession =(user:User) :void =>
-{
-    localStorage.setItem(
-        SESSION_KEY,
-        JSON.stringify(user)
-
-    );
+import { User } from "@/types/user";
+const KEY = "session";
+export const saveSession = (user: User): void => {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(KEY, JSON.stringify(user));
 };
-
-export const getSession =() :User|null =>
-{
-    const data =localStorage.getItem(SESSION_KEY);
-    if(!data) return null;
-    return JSON.parse(data);
+export const getSession = (): User | null => {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(KEY);
+    return raw ? (JSON.parse(raw) as User) : null;
+  } catch {
+    return null;
+  }
 };
-export const clearSession =():void =>
-{
-    localStorage.removeItem(SESSION_KEY);
+export const clearSession = (): void => {
+  if (typeof window === "undefined") return;
+  localStorage.removeItem(KEY);
 };
