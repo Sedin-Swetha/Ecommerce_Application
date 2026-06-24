@@ -21,16 +21,16 @@ export default function ProfileDetails({ user }: Props) {
                     <img
                         src={user.profileImage}
                         alt={user.name}
-                        className="h-16 w-16 rounded-full object-cover ring-2 ring-blue-100"
+                        className="h-16 w-16 rounded-full object-cover ring-2 ring-primary/20"
                     />
                 ) : (
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-600 text-xl font-bold text-white ring-2 ring-blue-100">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-xl font-bold text-white ring-2 ring-primary/20">
                         {getInitials(user.name)}
                     </div>
                 )}
                 <div>
                     <p className="text-lg font-bold text-gray-900">{user.name}</p>
-                    <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-700 capitalize mt-1">
+                    <span className="inline-flex items-center rounded-full bg-primary/5 px-2.5 py-0.5 text-xs font-medium text-primary-dark capitalize mt-1">
                         {user.role.toLowerCase()}
                     </span>
                 </div>

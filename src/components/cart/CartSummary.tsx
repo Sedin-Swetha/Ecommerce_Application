@@ -42,7 +42,7 @@ export default function CartSummary() {
             </div>
             <button
                 onClick={() => router.push("/checkout")}
-                className="w-full bg-blue-600 text-white py-3 rounded-xl font-medium hover:bg-blue-700 transition">
+                className="w-full bg-primary text-white py-3 rounded-xl font-medium hover:bg-primary-dark transition">
                 Proceed to Checkout
             </button>
             <button

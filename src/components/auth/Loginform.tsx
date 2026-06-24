@@ -13,8 +13,8 @@ export default function LoginForm() {
     const { login } = useAuth();
     const [error, setError] = useState("");
     const {
-        register,handleSubmit,formState: { errors, isSubmitting }, } = useForm<LoginInput>();
-        const onSubmit = async (
+        register, handleSubmit, formState: { errors, isSubmitting }, } = useForm<LoginInput>();
+    const onSubmit = async (
         data: LoginInput) => {
         setError("");
         const validationError =
@@ -24,7 +24,7 @@ export default function LoginForm() {
             return;
         }
         try {
-            const authenticatedUser =login(data);
+            const authenticatedUser = login(data);
             if (
                 authenticatedUser.role ===
                 UserRole.ADMIN
@@ -62,7 +62,7 @@ export default function LoginForm() {
                             type="email"
                             placeholder="Enter your email"
                             {...register("email", {
-                                required:"Email is required",
+                                required: "Email is required",
                             })} />
                         {errors.email && (
                             <p className="mt-1 text-sm text-red-500">
@@ -76,7 +76,7 @@ export default function LoginForm() {
                             type="password"
                             placeholder="Enter your password"
                             {...register("password", {
-                                required:"Password is required",
+                                required: "Password is required",
                             })}
                         />
                         {errors.password && (
@@ -87,7 +87,7 @@ export default function LoginForm() {
                     </div>
                     {error && (
                         <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600">
-                           {error}
+                            {error}
                         </div>
                     )}
                     <Button

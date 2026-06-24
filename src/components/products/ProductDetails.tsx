@@ -84,7 +84,7 @@ export default function ProductDetails({
                     ? "cursor-not-allowed bg-gray-400"
                     : inCart
                     ? "bg-green-600"
-                    : "bg-blue-600 hover:bg-blue-700"
+                    : "bg-primary hover:bg-primary-dark"
                 }
               `}
             >

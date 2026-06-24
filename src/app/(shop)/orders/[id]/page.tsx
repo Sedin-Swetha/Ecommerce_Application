@@ -64,7 +64,7 @@ export default function OrderDetailPage() {
                 </p>
                 <button
                     onClick={() => router.push("/orders")}
-                    className="mt-4 rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
+                    className="mt-4 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-dark"
                 >
                     Back to Orders
                 </button>

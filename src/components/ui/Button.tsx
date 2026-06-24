@@ -14,13 +14,13 @@ export default function Button({
       className={`
         w-full
         rounded-lg
-        bg-blue-600
+        bg-primary
         px-4
         py-3
         font-medium
         text-white
         transition
-        hover:bg-blue-700
+        hover:bg-primary-dark
         disabled:cursor-not-allowed
         disabled:opacity-50
         ${className}

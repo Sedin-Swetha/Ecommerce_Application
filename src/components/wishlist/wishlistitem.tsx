@@ -24,11 +24,11 @@ export default function WishlistItem({ product }: Props) {
         </div>
       </Link>
       <div className="flex flex-1 flex-col gap-0.5 min-w-0">
-        <p className="text-[10px] font-semibold uppercase tracking-widest text-blue-500">
+        <p className="text-[10px] font-semibold uppercase tracking-widest text-primary">
           {product.brand}
         </p>
         <Link href={`/products/${product.id}`}>
-          <h3 className="line-clamp-2 text-sm font-semibold text-gray-900 hover:text-blue-600">
+          <h3 className="line-clamp-2 text-sm font-semibold text-gray-900 hover:text-primary">
             {product.name}
           </h3>
         </Link>
@@ -68,7 +68,7 @@ export default function WishlistItem({ product }: Props) {
             className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
               inCart
                 ? "bg-green-100 text-green-700 cursor-default"
-                : "bg-blue-600 text-white hover:bg-blue-700 active:scale-95"
+                : "bg-primary text-white hover:bg-primary-dark active:scale-95"
             }`}
           >
             {inCart ? "✓ In Cart" : "Add to Cart"}

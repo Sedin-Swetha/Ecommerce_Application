@@ -6,7 +6,7 @@ export default function Footer() {
             <div className="mx-auto max-w-7xl px-4 py-8">
                 <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-start md:justify-between md:text-left">
                     <div>
-                        <h2 className="text-2xl font-bold text-blue-400">
+                        <h2 className="text-2xl font-bold text-primary">
                             ShopEase
                         </h2>
                         <p className="mt-2 text-sm text-gray-400">
@@ -14,18 +14,18 @@ export default function Footer() {
                         </p>
                     </div>
                     <div className="flex flex-wrap justify-center gap-6 text-sm">
-                        <Link href="/" className="transition hover:text-blue-400">
+                        <Link href="/" className="transition hover:text-primary">
                             Home
                         </Link>
                         <Link
                             href="/customer/products"
-                            className="transition hover:text-blue-400"
+                            className="transition hover:text-primary"
                         >
                             Products
                         </Link>
                         {/* <Link
                             href="/login"
-                            className="transition hover:text-blue-400"
+                            className="transition hover:text-primary"
                         >
                             Login
                         </Link> */}
@@ -33,7 +33,7 @@ export default function Footer() {
                     <div>
                         <a
                             href="mailto:support@shopease.com"
-                            className="text-sm text-gray-400 transition hover:text-blue-400 break-all"
+                            className="text-sm text-gray-400 transition hover:text-primary break-all"
                         >
                             support@shopease.com
                         </a>

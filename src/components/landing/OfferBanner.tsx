@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 export default function OfferBanner() {
   const offers = [
     {
@@ -18,7 +17,6 @@ export default function OfferBanner() {
       cta: "Order Now",
     },
   ];
-
   return (
     <section className="py-8 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -27,17 +25,14 @@ export default function OfferBanner() {
             <Link
               key={offer.label}
               href="/login"
-              className="rounded-lg border bg-white p-5 transition hover:shadow-md"
-            >
-              <p className="text-sm font-medium text-purple-600">
+              className="rounded-lg border bg-white p-5 transition hover:shadow-md">
+              <p className="text-sm font-medium text-primary">
                 {offer.label}
               </p>
-
               <h3 className="mt-2 text-lg font-semibold text-gray-900">
                 {offer.desc}
               </h3>
-
-              <span className="mt-4 inline-block text-sm font-medium text-purple-600">
+              <span className="mt-4 inline-block text-sm font-medium text-primary">
                 {offer.cta} →
               </span>
             </Link>

@@ -1,18 +1,15 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useWishlist } from "@/hooks/UseWishlist";
-
 interface Props {
   productId: string;
   className?: string;
 }
-
 export default function WishlistButton({ productId, className = "" }: Props) {
   const { isWishlisted, toggleItem } = useWishlist();
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
   const active = mounted ? isWishlisted(productId) : false;
-
   return (
     <button
       onClick={(e) => {

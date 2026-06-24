@@ -3,7 +3,6 @@ interface Props {
   totalPages: number;
   onPageChange: (page: number) => void;
 }
-
 export default function Pagination({
   currentPage,
   totalPages,
@@ -19,11 +18,10 @@ export default function Pagination({
             onClick={() =>
               onPageChange(i + 1)
             }
-            className={`rounded-lg border px-4 py-2 transition ${
-              currentPage === i + 1
-                ? "border-blue-600 bg-blue-600 text-white"
+            className={`rounded-lg border px-4 py-2 transition ${currentPage === i + 1
+                ? "border-primary bg-primary text-white"
                 : "bg-white text-gray-700 hover:bg-gray-100"
-            }`}
+              }`}
           >
             {i + 1}
           </button>

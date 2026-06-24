@@ -50,7 +50,7 @@ export default function RegisterForm() {
                     placeholder="Enter your name"
                     {...register("name", {
                         required: "Name is required",
-                    })}/>
+                    })} />
                 {errors.name && (
                     <p className="mt-1 text-sm text-red-500">
                         {errors.name.message}

@@ -6,19 +6,21 @@ import SearchBar from "@/components/products/SearchBar";
 import FilterSidebar from "@/components/products/Filter";
 import Pagination from "@/components/products/Pagination";
 import SortDropdown from "@/components/products/Sort";
-import {filterProducts,sortProducts,paginateProducts,} from "@/services/ProductService";
+import { useSearchParams } from "next/navigation";
+import { filterProducts, sortProducts, paginateProducts, } from "@/services/ProductService";
 export default function ProductsPage() {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("");
+  const searchParams = useSearchParams();
+  const [search, setSearch] = useState(() => searchParams.get("q") ?? "");
+  const [category, setCategory] = useState(() => searchParams.get("category") ?? "");
   const [brand, setBrand] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [discount, setDiscount] = useState("");
   const [sortBy, setSortBy] = useState("");
-  const [currentPage, setCurrentPage] =useState(1);
-  const [showFilters, setShowFilters] =useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [showFilters, setShowFilters] = useState(false);
   const productsPerPage = 8;
   const filteredProducts =
-  filterProducts(defaultProducts, {search,category,brand,priceRange,discount,});
+    filterProducts(defaultProducts, { search, category, brand, priceRange, discount, });
   const sortedProducts =
     sortProducts(
       filteredProducts,
@@ -34,7 +36,7 @@ export default function ProductsPage() {
     discount,
     sortBy,
   ]);
-  const totalPages = Math.ceil(sortedProducts.length /productsPerPage);
+  const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
   const paginatedProducts =
     paginateProducts(
       sortedProducts,
@@ -58,7 +60,7 @@ export default function ProductsPage() {
           mt-4
           w-full
           rounded-lg
-          bg-blue-600
+          bg-primary
           py-3
           font-medium
           text-white

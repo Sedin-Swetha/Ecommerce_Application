@@ -18,7 +18,7 @@ export default function CartItem({ item }: Props) {
             />
             <div className="flex-1 min-w-0">
                 <p className="font-medium text-gray-800 line-clamp-2">{product.name}</p>
-                <p className="text-sm text-blue-600 font-bold mt-1">₹{price.toLocaleString()}</p>
+                <p className="text-sm text-primary font-bold mt-1">₹{price.toLocaleString()}</p>
             </div>
             <div className="flex items-center gap-2">
                 <button
