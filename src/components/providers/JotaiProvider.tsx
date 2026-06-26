@@ -3,7 +3,7 @@ import { Provider, useSetAtom } from "jotai";
 import { useEffect } from "react";
 import { cartStorage } from "@/lib/storage/cart";
 import { wishlistStorage } from "@/lib/storage/wishlist";
-import { orderStorage } from "@/lib/storage/order";
+import { orderStorage } from "@/lib/storage/orders";
 import { cartAtom } from "@/store/cartAtom";
 import { wishlistAtom } from "@/store/wishlistAtom";
 import { ordersAtom } from "@/store/ordersAtom";

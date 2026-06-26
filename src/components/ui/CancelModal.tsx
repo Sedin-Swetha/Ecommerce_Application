@@ -13,14 +13,11 @@ export function CancelModal({ open, loading, onKeep, onConfirm }: CancelModalPro
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [open, onKeep]);
-
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
-
   if (!open) return null;
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div
