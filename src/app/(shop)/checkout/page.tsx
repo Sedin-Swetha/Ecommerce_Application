@@ -16,26 +16,11 @@ export default function CheckoutPage() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const [mounted, setMounted] = useState(false);
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-    useEffect(() => {
-        if (mounted && !user) {
-            router.push("/login");
-        }
-    }, [mounted, user, router]);
-    useEffect(() => {
-        if (mounted && cart.length === 0) {
-            router.push("/cart");
-        }
-    }, [mounted, cart, router]);
+    useEffect(() => {setMounted(true);}, []);
+    useEffect(() => {if (mounted && !user) {router.push("/login");} }, [mounted, user, router]);
+    useEffect(() => {if (mounted && cart.length === 0) {router.push("/cart");}}, [mounted, cart, router]);
     if (!mounted) {
-        return (
-            <div className="flex items-center justify-center py-20">
-                Loading...
-            </div>
-        );
-    }
+        return (<div className="flex items-center justify-center py-20">Loading...</div>);}
     if (!user || cart.length === 0) {
         return null;
     }

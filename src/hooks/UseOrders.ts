@@ -23,22 +23,17 @@ export function useOrders() {
     if (!exists) setOrders([order, ...orders]);
     return order;
   };
-
   const getUserOrders = (userId: string): Order[] => {
     const filtered = orders.filter((o) => o.userId === userId);
     return Array.from(new Map(filtered.map((o) => [o.id, o])).values());
   };
-
   const getOrderById = (orderId: string): Order | null =>
     orders.find((o) => o.id === orderId) ?? null;
-
   const updateStatus = (orderId: string, status: OrderStatus) => {
     setOrders(orders.map((o) =>
       o.id === orderId ? { ...o, status, updatedAt: new Date().toISOString() } : o
     ));
   };
-
   const cancelOrder = (orderId: string) => updateStatus(orderId, "cancelled");
-
   return { orders, placeOrder, getUserOrders, getOrderById, updateStatus, cancelOrder };
 }

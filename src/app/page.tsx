@@ -4,6 +4,7 @@ import CategoriesSection from "@/components/landing/CategoriesSection";
 import CategoryProducts from "@/components/landing/CategoryProducts";
 import HeroSection from "@/components/landing/HeroSection";
 import OfferBanner from "@/components/landing/OfferBanner";
+import Footer from "@/components/layout/footer";
 export default function LandingPage() {
     return (
         <main className="flex-1">
@@ -14,6 +15,7 @@ export default function LandingPage() {
                 <CategoryProducts />
                 <OfferBanner />
             </div>
+            <Footer />
         </main>
     );
 }
