@@ -50,13 +50,11 @@ export default function CheckoutPage() {
             sum + item.discountedPrice * item.quantity,
         0
     );
-    const shippingCharge =
-        subtotal >= SHIPPING_THRESHOLD ? 0 : 99;
+    const shippingCharge =subtotal >= SHIPPING_THRESHOLD ? 0 : 99;
     const total = subtotal + shippingCharge;
     const handlePlaceOrder = async (
         address: ShippingAddress,
-        payment: PaymentMethod
-    ) => {
+        payment: PaymentMethod) => {
         try {
             setIsLoading(true);
             await new Promise((resolve) =>

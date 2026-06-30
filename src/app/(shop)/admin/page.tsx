@@ -19,7 +19,7 @@ export default function AdminDashboardPage() {
       label: "Total Revenue",
       value: `₹${totalRevenue.toLocaleString("en-IN")}`,
       icon: "💰",
-      bg: "bg-emerald-50", text: "text-emerald-700", border: "border-emerald-200",
+      bg: "bg-emerald-50", text:"text-emerald-700", border: "border-emerald-200",
       sub: "From delivered orders",
     },
     {
