@@ -94,7 +94,7 @@ export default function AdminDashboardPage() {
           <h2 className="mb-3 text-sm font-bold uppercase tracking-widest text-gray-400">
             ⚠️ Low Stock Alert
           </h2>
-          <div className="overflow-hidden rounded-2xl border border-amber-200 bg-white">
+          <div className="overflow-x-auto rounded-2xl border border-amber-200 bg-white">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-100 bg-amber-50">
@@ -140,7 +140,7 @@ export default function AdminDashboardPage() {
             <p className="text-sm text-gray-400">No orders yet</p>
           </div>
         ) : (
-          <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white">
+          <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-white">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-100 bg-gray-50">

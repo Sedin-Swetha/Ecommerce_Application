@@ -1,16 +1,27 @@
 "use client";
 import { useAdminOrders } from "@/hooks/UseAdminOrders";
-import {OrderStatus} from "@/types/order";
+import { OrderStatus } from "@/types/order";
+import { useNotifications } from "@/hooks/Usenotifications";
+import { createOrderStatusNotification } from "@/services/Notificationservice";
 const STATUS_OPTIONS = ["pending", "processing", "shipped", "delivered", "cancelled"] as const;
 const STATUS_STYLES: Record<string, string> = {
-  pending:    "bg-amber-100 text-amber-700",
+  pending: "bg-amber-100 text-amber-700",
   processing: "bg-blue-100 text-blue-700",
-  shipped:    "bg-violet-100 text-violet-700",
-  delivered:  "bg-emerald-100 text-emerald-700",
-  cancelled:  "bg-red-100 text-red-600",
+  shipped: "bg-violet-100 text-violet-700",
+  delivered: "bg-emerald-100 text-emerald-700",
+  cancelled: "bg-red-100 text-red-600",
 };
 export default function AdminOrdersList() {
   const { orders, updateOrderStatus } = useAdminOrders();
+  const { addNotification } = useNotifications();
+  function handleStatusChange(orderId: string, newStatus: OrderStatus) {
+    const updated = updateOrderStatus(orderId, newStatus);
+    if (updated) {
+      addNotification(
+        createOrderStatusNotification(updated.id, updated.userId, updated.status)
+      );
+    }
+  }
   if (orders.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 py-16 text-center">
@@ -19,7 +30,7 @@ export default function AdminOrdersList() {
     );
   }
   return (
-    <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm">
+    <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-white shadow-sm">
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-gray-100 bg-gray-50">
@@ -46,7 +57,7 @@ export default function AdminOrdersList() {
               <td className="px-4 py-3">
                 <select
                   value={order.status}
-                  onChange={(e) => updateOrderStatus(order.id, e.target.value  as OrderStatus)}
+                  onChange={(e) => handleStatusChange(order.id, e.target.value as OrderStatus)}
                   className={`rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize cursor-pointer border-0 outline-none ${
                     STATUS_STYLES[order.status] ?? "bg-gray-100 text-gray-600"
                   }`}

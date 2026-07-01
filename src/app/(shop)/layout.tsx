@@ -8,13 +8,10 @@ import { useAuth } from "@/hooks/useAuth";
 import { UserRole } from "@/types/enums";
 import { useAtomValue } from "jotai";
 import { sidebarCollapsedAtom } from "@/store/sidebarAtom";
-
 function AdminLayout({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
   const collapsed = useAtomValue(sidebarCollapsedAtom);
-
   if (!user || user.role !== UserRole.ADMIN) return null;
-
   return (
     <div className="min-h-screen bg-gray-50">
       <AdminSidebar user={user} />
@@ -28,13 +25,11 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-
 export default function ShopLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const { user } = useAuth();
   const isAdminRoute = pathname.startsWith("/admin");
-
   useEffect(() => {
     if (!isAdminRoute) return;
     if (!user) {
@@ -45,15 +40,13 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
       router.push("/");
     }
   }, [isAdminRoute, user, router]);
-
   if (isAdminRoute) {
     return <AdminLayout>{children}</AdminLayout>;
   }
-
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className="flex-1 pt-16">{children}</main>
+     <main className="pt-28 sm:pt-20 lg:pt-16">{children}</main>
       <Footer />
     </div>
   );

@@ -4,17 +4,17 @@ import { adminOrderService } from "@/services/adminOrderService";
 import { Order, OrderStatus } from "@/types/order";
 export function useAdminOrders() {
   const [orders, setOrders] = useState<Order[]>([]);
-  useEffect(() => {setOrders(adminOrderService.getAll());}, []);
+  useEffect(() => { setOrders(adminOrderService.getAll()); }, []);
   const updateOrderStatus = useCallback(
-    (id: string, status: OrderStatus): boolean => {
+    (id: string, status: OrderStatus): Order | null => {
       const updated = adminOrderService.updateStatus(id, status);
       if (updated) {
         setOrders((prev) =>
           prev.map((o) => (o.id === id ? updated : o))
         );
-        return true;
+        return updated;
       }
-      return false;
+      return null;
     },
     []
   );
@@ -28,11 +28,7 @@ export function useAdminOrders() {
   const refresh = useCallback(() => {
     setOrders(adminOrderService.getAll());
   }, []);
-  return {
-    orders,
-    updateOrderStatus,
-    deleteOrder,
-    refresh,
+  return {orders,updateOrderStatus,deleteOrder,refresh,
     totalRevenue: adminOrderService.getTotalRevenue(),
     totalCount: orders.length,
     revenueByMonth: adminOrderService.getRevenueByMonth(),
