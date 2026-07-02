@@ -205,7 +205,7 @@ export default function OrderDetail({ order }: Props) {
                 onKeep={() => setModalOpen(false)}
                 onConfirm={handleConfirmCancel}
             />
-            <Toast show={showToast} onDone={() => setShowToast(false)} />
+            <Toast show={showToast} message="Order cancelled successfully." onDone={() => setShowToast(false)} />
         </>
     );
 }

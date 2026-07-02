@@ -7,5 +7,6 @@ export const STORAGE_KEYS = {
   CART: "shopease_cart",
   WISHLIST: "shopease_wishlist",
   NOTIFICATIONS: "shopease_notifications",
+  USERS: "shopease_users",
 } as const;
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
