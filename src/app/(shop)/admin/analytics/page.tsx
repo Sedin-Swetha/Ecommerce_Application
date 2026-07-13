@@ -1,10 +1,10 @@
 "use client";
 import { useMemo } from "react";
 import { adminAnalyticsService } from "@/services/adminAnalyticsService";
-import StatsCard from "@/components/admin/StatsCard";
-import RevenueChart from "@/components/admin/RevenueChart";
-import OrdersChart from "@/components/admin/OrdersChart";
-import ProductChart from "@/components/admin/ProductChart";
+import StatsCard from "@/components/admin/statsCard";
+import RevenueChart from "@/components/admin/revenueChart";
+import OrdersChart from "@/components/admin/ordersChart";
+import ProductChart from "@/components/admin/productChart";
 export default function AnalyticsPage() {
     const summary = useMemo(() => adminAnalyticsService.getSummary(), []);
     const revenueByMonth = useMemo(() => adminAnalyticsService.getRevenueByMonth(), []);
@@ -52,7 +52,6 @@ export default function AnalyticsPage() {
             border: "border-amber-200",
         },
     ];
-
     return (
         <div className="flex flex-col gap-6">
             <div>

@@ -45,6 +45,14 @@ export default function OrderDetail({ order }: Props) {
                                     day: "numeric", month: "long", year: "numeric",
                                 })}
                             </p>
+                            {order.expectedDeliveryDate && (
+                                <p className="text-xs font-medium text-emerald-600 mt-0.5">
+                                    Expected Delivery by{" "}
+                                    {new Date(order.expectedDeliveryDate).toLocaleDateString("en-IN", {
+                                        day: "numeric", month: "long", year: "numeric",
+                                    })}
+                                </p>
+                            )}
                         </div>
                         <div className={`inline-flex items-center gap-2 self-start rounded-full border px-4 py-1.5 text-sm font-semibold sm:self-auto ${status.bg} ${status.text} ${status.border}`}>
                             <span>{status.icon}</span>

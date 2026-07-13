@@ -21,8 +21,8 @@ export default function NotificationItem({ notification, onRead }: Props) {
   const content = (
     <div
       onClick={() => onRead(notification.id)}
-      className={`flex gap-3 px-4 py-3 cursor-pointer transition hover:bg-gray-50 ${
-        notification.read ? "" : "bg-primary/5"
+      className={`flex gap-3 px-4 py-3 cursor-pointer transition hover:bg-gray-50 dark:hover:bg-gray-800 ${
+        notification.read ? "" : "bg-primary/5 dark:bg-primary/20"
       }`}
     >
       <span
@@ -31,9 +31,9 @@ export default function NotificationItem({ notification, onRead }: Props) {
         }`}
       />
       <div className="min-w-0">
-        <p className="text-sm font-semibold text-gray-900">{notification.title}</p>
-        <p className="mt-0.5 text-xs text-gray-500 line-clamp-2">{notification.message}</p>
-        <p className="mt-1 text-[10px] text-gray-400">{timeAgo(notification.createdAt)}</p>
+        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{notification.title}</p>
+        <p className="mt-0.5 text-xs text-gray-500 dark:text-gray-400 line-clamp-2">{notification.message}</p>
+        <p className="mt-1 text-[10px] text-gray-400 dark:text-gray-500">{timeAgo(notification.createdAt)}</p>
       </div>
     </div>
   );

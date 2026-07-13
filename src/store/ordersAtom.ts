@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { orderStorage } from "@/lib/storage/orders";
 import { Order } from "@/types/order";
-export const ordersAtom = atom<Order[]>(orderStorage.get());
+export const ordersAtom = atom<Order[]>([]);
 export const ordersAtomWithSync = atom(
   (get) => get(ordersAtom),
   (_get, set, newOrders: Order[]) => {

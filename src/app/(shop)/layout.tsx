@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/footer";
-import AdminSidebar from "@/components/admin/AdminSidebar";
+import AdminSidebar from "@/components/admin/adminSidebar";
 import { useAuth } from "@/hooks/useAuth";
 import { UserRole } from "@/types/enums";
 import { useAtomValue } from "jotai";
@@ -13,7 +13,7 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
   const collapsed = useAtomValue(sidebarCollapsedAtom);
   if (!user || user.role !== UserRole.ADMIN) return null;
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       <AdminSidebar user={user} />
       <main
         className={`min-h-screen pt-14 md:pt-0 transition-all duration-300 ${
@@ -44,9 +44,9 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
     return <AdminLayout>{children}</AdminLayout>;
   }
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300">
       <Navbar />
-     <main className="pt-28 sm:pt-20 lg:pt-16">{children}</main>
+      <main className="flex-1 pt-28 sm:pt-20 lg:pt-16">{children}</main>
       <Footer />
     </div>
   );

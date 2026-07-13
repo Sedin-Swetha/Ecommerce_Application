@@ -103,7 +103,7 @@ export default function AdminSidebar({ user }: Props) {
             </div>
             {!small && (
                 <div>
-                    <p className="text-sm font-bold text-gray-900">ShopEase</p>
+                    <p className="text-sm font-bold text-gray-100">ShopEase</p>
                     <p className="text-[10px] uppercase tracking-widest text-gray-400">Admin Panel</p>
                 </div>
             )}
@@ -113,8 +113,6 @@ export default function AdminSidebar({ user }: Props) {
         <div className="flex h-full flex-col">
             <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-3 py-4">
                 {NAV_ITEMS.map((item) => {
-                    // NOTE: the old "comingSoon" branch has been removed entirely.
-                    // Every item now always renders as a real <Link>.
                     const active = item.isActive(pathname);
                     return (
                         <Link
@@ -125,7 +123,7 @@ export default function AdminSidebar({ user }: Props) {
                             className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${collapsed ? "justify-center" : ""
                                 } ${active
                                     ? "bg-primary text-white"
-                                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"}`}>
+                                    : "text-gray-400 hover:bg-slate-900 hover:text-white"}`}>
                             <span className={`flex-shrink-0 ${active ? "text-white" : "text-gray-400"}`}>
                                 {item.icon}
                             </span>
@@ -134,7 +132,7 @@ export default function AdminSidebar({ user }: Props) {
                     );
                 })}
             </nav>
-            <div className="border-t border-gray-100 px-3 py-4 space-y-1">
+            <div className="border-t border-gray-800 px-3 py-4 space-y-1">
                 {collapsed ? (
                     <div className="flex justify-center py-1">
                         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
@@ -142,12 +140,12 @@ export default function AdminSidebar({ user }: Props) {
                         </div>
                     </div>
                 ) : (
-                    <div className="flex items-center gap-3 rounded-xl bg-gray-50 px-3 py-2.5 mb-2">
+                    <div className="flex items-center gap-3 rounded-xl bg-slate-900 px-3 py-2.5 mb-2">
                         <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
                             {initials}
                         </div>
                         <div className="min-w-0">
-                            <p className="truncate text-sm font-semibold text-gray-900">{user.name}</p>
+                            <p className="truncate text-sm font-semibold text-gray-100">{user.name}</p>
                             <p className="text-[10px] text-gray-400">Administrator</p>
                         </div>
                     </div>
@@ -156,7 +154,7 @@ export default function AdminSidebar({ user }: Props) {
                     href="/"
                     onClick={onNav}
                     title={collapsed ? "Back to Store" : undefined}
-                    className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition ${collapsed ? "justify-center" : ""
+                    className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-300 hover:bg-slate-900 hover:text-white transition ${collapsed ? "justify-center" : ""
                         }`}
                 >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0">
@@ -168,7 +166,7 @@ export default function AdminSidebar({ user }: Props) {
                 <button
                     onClick={() => { logout(); onNav?.(); }}
                     title={collapsed ? "Logout" : undefined}
-                    className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-red-500 hover:bg-red-50 transition ${collapsed ? "justify-center" : ""
+                    className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-red-400 hover:bg-red-950 transition ${collapsed ? "justify-center" : ""
                         }`}
                 >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0">
@@ -186,12 +184,12 @@ export default function AdminSidebar({ user }: Props) {
     }
     return (
         <>
-            <div className="fixed left-0 right-0 top-0 z-50 flex h-14 items-center justify-between border-b border-gray-200 bg-white px-4 md:hidden">
+            <div className="fixed left-0 right-0 top-0 z-50 flex h-14 items-center justify-between border-b border-gray-800 bg-slate-950 px-4 md:hidden">
                 <Logo small />
-                <span className="text-sm font-bold text-gray-900">Admin Panel</span>
+                <span className="text-sm font-bold text-gray-100">Admin Panel</span>
                 <button
                     onClick={() => setMobileOpen(true)}
-                    className="flex h-9 w-9 items-center justify-center rounded-lg hover:bg-gray-100 transition"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-900 text-gray-200 hover:bg-slate-800 transition"
                     aria-label="Open menu"
                 >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -208,14 +206,14 @@ export default function AdminSidebar({ user }: Props) {
                 />
             )}
             <aside
-                className={`fixed left-0 top-0 z-50 flex h-full w-64 flex-col border-r border-gray-200 bg-white shadow-xl transition-transform duration-300 md:hidden ${mobileOpen ? "translate-x-0" : "-translate-x-full"
+                className={`fixed left-0 top-0 z-50 flex h-full w-64 flex-col border-r border-gray-800 bg-slate-950 shadow-black/20 transition-transform duration-300 md:hidden ${mobileOpen ? "translate-x-0" : "-translate-x-full"
                     }`}
             >
-                <div className="flex h-14 items-center justify-between border-b border-gray-100 px-4">
+                <div className="flex h-14 items-center justify-between border-b border-gray-800 px-4">
                     <Logo />
                     <button
                         onClick={() => setMobileOpen(false)}
-                        className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-gray-100 transition"
+                        className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-gray-200 hover:bg-slate-800 transition"
                         aria-label="Close menu"
                     >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -226,10 +224,10 @@ export default function AdminSidebar({ user }: Props) {
                 <SidebarBody onNav={() => setMobileOpen(false)} />
             </aside>
             <aside
-                className={`fixed left-0 top-0 z-40 hidden h-full flex-col border-r border-gray-200 bg-white shadow-sm transition-all duration-300 md:flex ${collapsed ? "w-16" : "w-60"
+                className={`fixed left-0 top-0 z-40 hidden h-full flex-col border-r border-gray-800 bg-slate-950 shadow-black/10 transition-all duration-300 md:flex ${collapsed ? "w-16" : "w-60"
                     }`}
             >
-                <div className={`flex h-16 items-center border-b border-gray-100 px-3 ${collapsed ? "justify-center" : "justify-between"}`}>
+                <div className={`flex h-16 items-center border-b border-gray-800 px-3 ${collapsed ? "justify-center" : "justify-between"}`}>
                     {!collapsed && <Logo />}
                     {collapsed && (
                         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
@@ -242,7 +240,7 @@ export default function AdminSidebar({ user }: Props) {
                     )}
                     <button
                         onClick={() => setCollapsed(!collapsed)}
-                        className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition"
+                        className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg text-gray-400 hover:bg-slate-900 hover:text-white transition"
                         aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
                     >
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

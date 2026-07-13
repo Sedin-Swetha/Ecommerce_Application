@@ -1,6 +1,4 @@
 export type CategoryId = "CAT001" | "CAT002" | "CAT003" | "CAT004" | "CAT005" | "CAT006"
-
-
 export interface Product {
   id: string;
   name: string;

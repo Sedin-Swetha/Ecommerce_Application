@@ -1,12 +1,14 @@
 "use client";
 import { useCart } from "@/hooks/useCart";
 import { useRouter } from "next/navigation";
-import { defaultProducts } from "@/data/products";
+import { useAtomValue } from "jotai";
+import { productsAtom } from "@/store/ProductAtom";
 export default function CartSummary() {
     const { cart, clearCart } = useCart();
     const router = useRouter();
+    const products = useAtomValue(productsAtom);
     const total = cart.reduce((sum, item) => {
-        const product = defaultProducts.find((p) => p.id === item.productId);
+        const product = products.find((p) => p.id === item.productId);
         if (!product) return sum;
         const price = Math.round(
             product.price - (product.price * product.discount) / 100
@@ -18,7 +20,6 @@ export default function CartSummary() {
     return (
         <div className="rounded-xl border bg-white p-5 space-y-4 sticky top-20">
             <h2 className="font-bold text-gray-900">Order Summary</h2>
-
             <div className="space-y-2 text-sm text-gray-600">
                 <div className="flex justify-between">
                     <span>Subtotal</span>

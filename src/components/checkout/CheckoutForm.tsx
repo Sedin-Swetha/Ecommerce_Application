@@ -51,7 +51,6 @@ export default function CheckoutForm({ onSubmit, isLoading }: Props) {
     });
     const [payment, setPayment] = useState<PaymentMethod>("cod");
     const [errors, setErrors] = useState<Partial<ShippingAddress>>({});
-
     const handleChange = (field: keyof ShippingAddress, value: string) => {
         setAddress((prev) => ({ ...prev, [field]: value }));
         if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));

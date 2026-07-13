@@ -11,16 +11,7 @@ export interface User {
 	createdAt: string;
 	updatedAt?: string;
 }
-export interface LoginInput {
-	email: string
-	password: string
-}
-export interface RegisterInput {
-	name: string
-	email: string
-	password: string
-	phone: string
-}
+export type { LoginInput, RegisterInput } from "@/lib/schemas/authSchemas";
 export interface AuthState {
 	user: User | null
 	isLoading: boolean

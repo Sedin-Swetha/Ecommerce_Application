@@ -1,11 +1,12 @@
 "use client";
 import { CartItem as CartItemType } from "@/types/product";
-import { defaultProducts } from "@/data/products";
+import { useAtomValue } from "jotai";
+import { productByIdAtom } from "@/store/ProductAtom";
 import { useCart } from "@/hooks/useCart";
 interface Props { item: CartItemType }
 export default function CartItem({ item }: Props) {
     const { updateQuantity, removeItem } = useCart();
-    const product = defaultProducts.find((p) => p.id === item.productId);
+    const product = useAtomValue(productByIdAtom(item.productId));
     if (!product) return null;
     const price = Math.round(product.price - (product.price * product.discount) / 100);
     const subtotal = price * item.quantity;

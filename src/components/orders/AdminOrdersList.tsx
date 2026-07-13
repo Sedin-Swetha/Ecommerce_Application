@@ -24,34 +24,34 @@ export default function AdminOrdersList() {
   }
   if (orders.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 py-16 text-center">
-        <p className="text-sm text-gray-400">No orders yet</p>
+      <div className="rounded-2xl border border-dashed border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 py-16 text-center">
+        <p className="text-sm text-gray-400 dark:text-gray-500">No orders yet</p>
       </div>
     );
   }
   return (
-    <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-white shadow-sm">
+    <div className="overflow-x-auto rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-gray-100 bg-gray-50">
-            <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600">Order ID</th>
-            <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 hidden sm:table-cell">Customer</th>
-            <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 hidden md:table-cell">Date</th>
-            <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600">Total</th>
-            <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600">Status</th>
+          <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50">
+            <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300">Order ID</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 hidden sm:table-cell">Customer</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 hidden md:table-cell">Date</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300">Total</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300">Status</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-50">
+        <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
           {orders.map((order) => (
-            <tr key={order.id} className="hover:bg-gray-50 transition">
-              <td className="px-4 py-3 font-mono text-xs text-gray-700">{order.id}</td>
-              <td className="px-4 py-3 text-gray-600 hidden sm:table-cell">{order.userId}</td>
-              <td className="px-4 py-3 text-gray-500 hidden md:table-cell">
+            <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+              <td className="px-4 py-3 font-mono text-xs text-gray-700 dark:text-gray-300">{order.id}</td>
+              <td className="px-4 py-3 text-gray-600 dark:text-gray-400 hidden sm:table-cell">{order.userId}</td>
+              <td className="px-4 py-3 text-gray-500 dark:text-gray-400 hidden md:table-cell">
                 {new Date(order.createdAt).toLocaleDateString("en-IN", {
                   day: "numeric", month: "short", year: "numeric",
                 })}
               </td>
-              <td className="px-4 py-3 font-semibold text-gray-900">
+              <td className="px-4 py-3 font-semibold text-gray-900 dark:text-gray-100">
                 ₹{order.total.toLocaleString("en-IN")}
               </td>
               <td className="px-4 py-3">

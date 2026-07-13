@@ -1,10 +1,36 @@
 "use client";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 import { useCart } from "@/hooks/useCart";
+import { UserRole } from "@/types/enums";
 import CartItem from "@/components/cart/CartItem";
 import CartSummary from "@/components/cart/CartSummary";
 import Link from "next/link";
 export default function CartPage() {
+    const { user } = useAuth();
     const { cart } = useCart();
+    const router = useRouter();
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+    useEffect(() => {
+        if (!mounted) return;
+        if (!user) {
+            router.push("/login?redirect=/cart");
+            return;
+        }
+        if (user.role === UserRole.ADMIN) {
+            router.push("/admin");
+        }
+    }, [mounted, user, router]);
+    if (!mounted) {
+        return (
+            <div className="flex items-center justify-center py-20">Loading...</div>
+        );
+    }
+    if (!user || user.role === "admin") return null;
     if (cart.length === 0) {
         return (
             <div className="max-w-7xl mx-auto px-4 py-24 text-center">

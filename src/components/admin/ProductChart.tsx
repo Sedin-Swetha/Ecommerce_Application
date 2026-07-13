@@ -9,9 +9,9 @@ const COLORS = ["#7c3aed", "#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"
 function CustomTooltip({ active, payload }: any) {
     if (!active || !payload?.length) return null;
     return (
-        <div className="rounded-xl border border-gray-100 bg-white px-4 py-3 shadow-lg">
-            <p className="mb-1 text-xs font-semibold text-gray-500">{payload[0].name}</p>
-            <p className="text-sm font-bold text-gray-900">
+        <div className="rounded-xl border border-gray-100 bg-white px-4 py-3 shadow-lg dark:border-gray-800 dark:bg-slate-950">
+            <p className="mb-1 text-xs font-semibold text-gray-500 dark:text-gray-400">{payload[0].name}</p>
+            <p className="text-sm font-bold text-gray-900 dark:text-gray-100">
                 ₹{payload[0].value.toLocaleString("en-IN")}
             </p>
         </div>
@@ -21,15 +21,15 @@ export default function ProductChart({ data, topProducts }: Props) {
     const hasData = data.length > 0 && data.some((d) => d.value > 0);
     return (
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+            <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-slate-950">
                 <div className="mb-4">
-                    <p className="text-sm font-bold text-gray-900">Revenue by Category</p>
+                    <p className="text-sm font-bold text-gray-900 dark:text-gray-100">Revenue by Category</p>
                     <p className="mt-0.5 text-xs text-gray-400">Share of delivered order revenue</p>
                 </div>
                 {!hasData ? (
-                    <div className="flex h-[220px] flex-col items-center justify-center rounded-xl bg-gray-50 text-center">
+                    <div className="flex h-[220px] flex-col items-center justify-center rounded-xl bg-gray-50 text-center dark:bg-slate-900">
                         <span className="text-3xl">🗂️</span>
-                        <p className="mt-2 text-sm text-gray-400">
+                        <p className="mt-2 text-sm text-gray-400 dark:text-gray-500">
                             No category revenue yet
                         </p>
                     </div>
@@ -68,15 +68,15 @@ export default function ProductChart({ data, topProducts }: Props) {
                     </>
                 )}
             </div>
-            <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+            <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-slate-950">
                 <div className="mb-4">
-                    <p className="text-sm font-bold text-gray-900">Top Products</p>
+                    <p className="text-sm font-bold text-gray-900 dark:text-gray-100">Top Products</p>
                     <p className="mt-0.5 text-xs text-gray-400">By revenue from delivered orders</p>
                 </div>
                 {topProducts.length === 0 ? (
-                    <div className="flex h-[220px] flex-col items-center justify-center rounded-xl bg-gray-50 text-center">
+                    <div className="flex h-[220px] flex-col items-center justify-center rounded-xl bg-gray-50 text-center dark:bg-slate-900">
                         <span className="text-3xl">🛍️</span>
-                        <p className="mt-2 text-sm text-gray-400">No sales data yet</p>
+                        <p className="mt-2 text-sm text-gray-400 dark:text-gray-500">No sales data yet</p>
                     </div>
                 ) : (
                     <div className="flex flex-col gap-3">
@@ -87,21 +87,21 @@ export default function ProductChart({ data, topProducts }: Props) {
                                 <div key={p.name}>
                                     <div className="mb-1 flex items-center justify-between">
                                         <div className="flex items-center gap-2 min-w-0">
-                                            <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-gray-100 text-[10px] font-bold text-gray-500">
+                                            <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-gray-100 text-[10px] font-bold text-gray-500 dark:bg-slate-800 dark:text-gray-300">
                                                 {i + 1}
                                             </span>
                                             <div className="min-w-0">
-                                                <p className="truncate text-xs font-semibold text-gray-800">
+                                                <p className="truncate text-xs font-semibold text-gray-800 dark:text-gray-100">
                                                     {p.name}
                                                 </p>
-                                                <p className="text-[10px] text-gray-400">{p.brand} · {p.sold} sold</p>
+                                                <p className="text-[10px] text-gray-400 dark:text-gray-400">{p.brand} · {p.sold} sold</p>
                                             </div>
                                         </div>
-                                        <p className="ml-2 flex-shrink-0 text-xs font-bold text-gray-900">
+                                        <p className="ml-2 flex-shrink-0 text-xs font-bold text-gray-900 dark:text-gray-100">
                                             ₹{p.revenue.toLocaleString("en-IN")}
                                         </p>
                                     </div>
-                                    <div className="h-1.5 w-full rounded-full bg-gray-100">
+                                    <div className="h-1.5 w-full rounded-full bg-gray-100 dark:bg-slate-800">
                                         <div
                                             className="h-1.5 rounded-full bg-primary transition-all duration-500"
                                             style={{ width: `${pct}%` }}

@@ -53,8 +53,6 @@ export default function ProductGrid({ products, isAdmin = false }: Props) {
           </Link>
         ))}
       </div>
-
-      {/* Single shared modal — only one ever mounts */}
       <ProductFormModal
         open={!!editProduct}
         onClose={() => setEditProduct(null)}

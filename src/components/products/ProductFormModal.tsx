@@ -1,9 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useAtomValue } from "jotai";
 import Modal from "@/components/ui/Modal";
 import { AdminProductForm } from "@/types/admin";
 import { CategoryId } from "@/types/product";
-import { defaultCategories } from "@/data/categories";
+import { categoriesAtom } from "@/store/CategoryAtom";
+import { productSchema } from "@/lib/schemas/productSchema";
 interface Props {
   open: boolean;
   onClose: () => void;
@@ -31,6 +33,7 @@ export default function ProductFormModal({
   mode,
   loading = false,
 }: Props) {
+  const categories = useAtomValue(categoriesAtom);
   const [form, setForm] = useState<AdminProductForm>(EMPTY_FORM);
   const [errors, setErrors] = useState<Partial<Record<keyof AdminProductForm, string>>>({});
   useEffect(() => {
@@ -42,16 +45,21 @@ export default function ProductFormModal({
     setErrors({});
   }, [open, mode, initialData]);
   function validate(): boolean {
-    const e: typeof errors = {};
-    if (!form.name.trim())        e.name        = "Name is required";
-    if (!form.brand.trim())       e.brand       = "Brand is required";
-    if (!form.description.trim()) e.description = "Description is required";
-    if (form.price <= 0)          e.price       = "Price must be greater than 0";
-    if (form.stock < 0)           e.stock       = "Stock cannot be negative";
-    if (form.discount < 0 || form.discount > 100) e.discount = "Discount must be 0–100";
-    if (!form.images[0]?.trim())  e.images      = "At least one image URL is required";
-    setErrors(e);
-    return Object.keys(e).length === 0;
+    // Use Zod safeParse to validate the entire form at once
+    const result = productSchema.safeParse(form);
+    if (result.success) {
+      setErrors({});
+      return true;
+    }
+    const zodErrors: Partial<Record<keyof AdminProductForm, string>> = {};
+    for (const issue of result.error.issues) {
+      const field = issue.path[0] as keyof AdminProductForm;
+      if (field && !zodErrors[field]) {
+        zodErrors[field] = issue.message;
+      }
+    }
+    setErrors(zodErrors);
+    return false;
   }
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -113,7 +121,7 @@ export default function ProductFormModal({
             onChange={(e) => setForm({ ...form, categoryId: e.target.value as CategoryId })}
             className="rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
           >
-            {defaultCategories.map((cat) => (
+            {categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
                 {cat.name}
               </option>

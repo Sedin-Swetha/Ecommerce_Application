@@ -1,5 +1,6 @@
 "use client";
-import { defaultCategories } from "@/data/categories";
+import { useAtomValue } from "jotai";
+import { categoriesAtom } from "@/store/CategoryAtom";
 interface Props {
   value: string;
   onChange: (value: string) => void;
@@ -8,7 +9,7 @@ interface Props {
   onCategoryChange?: (cat: string) => void;
   showCategory?: boolean;
   placeholder?: string;
-  compact?: boolean; // true = h-10 (navbar), false = h-12 (page)
+  compact?: boolean; 
 }
 export default function SearchBar({
   value,
@@ -20,6 +21,7 @@ export default function SearchBar({
   placeholder = "Search products...",
   compact = false,
 }: Props) {
+  const categories = useAtomValue(categoriesAtom);
   if (!onSubmit) {
     return (
       <input
@@ -44,7 +46,7 @@ export default function SearchBar({
           className="shrink-0 border-r border-gray-300 bg-gray-50 px-3 text-sm text-gray-600 focus:outline-none cursor-pointer"
         >
           <option value="">All</option>
-          {defaultCategories.map((cat) => (
+          {categories.map((cat) => (
             <option key={cat.id} value={cat.id}>
               {cat.name}
             </option>

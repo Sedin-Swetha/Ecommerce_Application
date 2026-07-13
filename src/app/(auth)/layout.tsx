@@ -11,6 +11,7 @@ export default function AuthLayout({
       items-center
       justify-center
       bg-gray-100
+      dark:bg-gray-950
       px-4
     "
     >

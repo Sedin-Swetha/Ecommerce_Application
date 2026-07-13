@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { wishlistStorage } from "@/lib/storage/wishlist";
-export const wishlistAtom = atom<string[]>(wishlistStorage.get());
+export const wishlistAtom = atom<string[]>([]);
 export const wishlistAtomWithSync = atom(
   (get) => get(wishlistAtom),
   (_get, set, newList: string[]) => {
