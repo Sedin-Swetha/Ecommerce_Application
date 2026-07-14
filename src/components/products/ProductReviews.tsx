@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useReviews } from "@/hooks/useReviews";
 import { useAuth } from "@/hooks/useAuth";
+import { UserRole } from "@/types/enums";
 import StarRating from "@/components/ui/StarRating";
 import Button from "@/components/ui/Button";
 export default function ProductReviews({ productId }: { productId: string }) {
@@ -44,6 +45,10 @@ export default function ProductReviews({ productId }: { productId: string }) {
       {!user ? (
         <div className="mb-8 rounded-xl bg-gray-50 p-4 text-center text-gray-600">
           Please <a href="/login" className="font-semibold text-primary hover:underline">log in</a> to write a review.
+        </div>
+      ) : user.role === UserRole.ADMIN ? (
+        <div className="mb-8 rounded-xl bg-blue-50 p-4 text-center text-blue-700">
+          Administrators cannot write product reviews.
         </div>
       ) : userHasReviewed ? (
         <div className="mb-8 rounded-xl bg-green-50 p-4 text-center text-green-700">
