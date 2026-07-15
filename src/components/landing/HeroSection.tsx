@@ -1,6 +1,19 @@
+"use client";
+
 import Link from "next/link";
 import { ROUTES } from "@/constants/routes";
+import { useAtomValue } from "jotai";
+import { isAuthenticatedAtom } from "@/store/userAtom";
+import { useState, useEffect } from "react";
+
 export default function HeroSection() {
+  const isAuthenticated = useAtomValue(isAuthenticatedAtom);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <section className="overflow-hidden bg-primary text-white pt-16 sm:pt-0 dark:bg-slate-950 dark:text-white">
       <div className="border-b border-white/20 bg-primary/90 px-4 py-2 text-center text-[11px] font-medium tracking-wide sm:text-xs dark:border-white/10 dark:bg-slate-900/80">
@@ -16,18 +29,33 @@ export default function HeroSection() {
             fashion, books, and home essentials all in one place.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
-            <Link
-              href={ROUTES.REGISTER}
-              className="rounded-md bg-white px-6 py-2.5 text-center font-semibold text-primary transition hover:bg-white/90 dark:border-white/20 dark:hover:bg-white/10"
-            >
-              Start Shopping
-            </Link>
-            <Link
-              href={ROUTES.LOGIN}
-              className="rounded-md border border-white px-6 py-2.5 text-center font-semibold transition hover:bg-white/10 dark:border-white/20 dark:hover:bg-white/10"
-            >
-              Sign In
-            </Link>
+            {mounted ? (
+              isAuthenticated ? (
+                <Link
+                  href="/products"
+                  className="rounded-md bg-white px-6 py-2.5 text-center font-semibold text-primary transition hover:bg-white/90 dark:border-white/20 dark:hover:bg-white/10"
+                >
+                  Continue Shopping
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    href={ROUTES.REGISTER}
+                    className="rounded-md bg-white px-6 py-2.5 text-center font-semibold text-primary transition hover:bg-white/90 dark:border-white/20 dark:hover:bg-white/10"
+                  >
+                    Start Shopping
+                  </Link>
+                  <Link
+                    href={ROUTES.LOGIN}
+                    className="rounded-md border border-white px-6 py-2.5 text-center font-semibold transition hover:bg-white/10 dark:border-white/20 dark:hover:bg-white/10"
+                  >
+                    Sign In
+                  </Link>
+                </>
+              )
+            ) : (
+              <div className="h-10"></div>
+            )}
           </div>
           <div className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-4 sm:gap-x-10">
             <div>
