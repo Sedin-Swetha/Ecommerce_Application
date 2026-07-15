@@ -94,8 +94,8 @@ export default function OrderDetail({ order }: Props) {
                                 return (
                                     <div key={step} className="relative z-10 flex flex-col items-center gap-2" style={{ width: "25%" }}>
                                         <div className={`flex h-9 w-9 items-center justify-center rounded-full border-2 text-xs font-bold transition-all duration-300 ${done ? "border-primary bg-primary text-white" :
-                                                active ? "border-violet-500 bg-violet-500 text-white shadow-lg shadow-violet-200" :
-                                                    "border-gray-200 bg-white text-gray-400"
+                                            active ? "border-violet-500 bg-violet-500 text-white shadow-lg shadow-violet-200" :
+                                                "border-gray-200 bg-white text-gray-400"
                                             }`}>
                                             {done ? "✓" : i + 1}
                                         </div>

@@ -2,7 +2,6 @@
 import { useAtom } from "jotai";
 import { useCallback } from "react";
 import { usersAtom } from "@/store/userAtom";
-import { User } from "@/types/user";
 import { UserRole } from "@/types/enums";
 export function useAdminUsers() {
     const [users, setUsers] = useAtom(usersAtom);
@@ -28,5 +27,5 @@ export function useAdminUsers() {
     const activeUsers = users.filter((u) => !u.isBlocked).length;
     const blockedUsers = users.filter((u) => u.isBlocked).length;
     const adminUsers = users.filter((u) => u.role === UserRole.ADMIN).length;
-    return {users,blockUser,unblockUser,changeRole,deleteUser,totalUsers,activeUsers,blockedUsers,adminUsers};
+    return { users, blockUser, unblockUser, changeRole, deleteUser, totalUsers, activeUsers, blockedUsers, adminUsers };
 }

@@ -1,10 +1,4 @@
-import {
-	getOrders,
-	getOrderById,
-	getOrdersByUser,
-	updateOrderStatus as storageUpdateStatus,
-	deleteOrder as storageDelete,
-	addOrder,
+import {getOrders, getOrderById, getOrdersByUser, updateOrderStatus as storageUpdateStatus, deleteOrder as storageDelete, addOrder,
 } from "@/lib/storage/orders";
 import { Order, OrderStatus } from "@/types/order";
 export const adminOrderService = {

@@ -1,17 +1,17 @@
 import { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {}
+    extends ButtonHTMLAttributes<HTMLButtonElement> { }
 
 export default function Button({
-  children,
-  className = "",
-  ...props
+    children,
+    className = "",
+    ...props
 }: ButtonProps) {
-  return (
-    <button
-      {...props}
-      className={`
+    return (
+        <button
+            {...props}
+            className={`
         w-full
         rounded-lg
         bg-primary
@@ -25,8 +25,8 @@ export default function Button({
         disabled:opacity-50
         ${className}
       `}
-    >
-      {children}
-    </button>
-  );
+        >
+            {children}
+        </button>
+    );
 }

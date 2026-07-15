@@ -11,11 +11,9 @@ import StarRating from "@/components/ui/StarRating";
 import ProductFormModal from "@/components/products/ProductFormModal";
 import ProductReviews from "@/components/products/ProductReviews";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
-
 interface Props {
   product: Product;
 }
-
 export default function ProductDetailClient({ product: serverProduct }: Props) {
   const router = useRouter();
   const { user } = useAuth();
@@ -25,16 +23,13 @@ export default function ProductDetailClient({ product: serverProduct }: Props) {
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const product = products.find((p) => p.id === serverProduct.id) ?? serverProduct;
   if (!product) {
     notFound();
   }
-
   const discountedPrice = Math.round(product.price - (product.price * product.discount) / 100);
   const savedAmount = product.price - discountedPrice;
   const quantity = getQuantity(product.id);
-
   const initialData: Partial<AdminProductForm> = {
     name: product.name,
     description: product.description,
@@ -46,14 +41,12 @@ export default function ProductDetailClient({ product: serverProduct }: Props) {
     images: product.images,
     isFeatured: product.isFeatured,
   };
-
   async function handleUpdate(form: AdminProductForm) {
     setLoading(true);
     updateProduct(product.id, form);
     setLoading(false);
     setEditOpen(false);
   }
-
   async function handleDelete() {
     setLoading(true);
     deleteProduct(product.id);
@@ -61,7 +54,6 @@ export default function ProductDetailClient({ product: serverProduct }: Props) {
     setDeleteOpen(false);
     router.push("/products");
   }
-
   return (
     <div className="mx-auto max-w-5xl px-4 py-10">
       {isAdmin && (

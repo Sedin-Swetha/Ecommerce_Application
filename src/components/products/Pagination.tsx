@@ -19,8 +19,8 @@ export default function Pagination({
               onPageChange(i + 1)
             }
             className={`rounded-lg border px-4 py-2 transition ${currentPage === i + 1
-                ? "border-primary bg-primary text-white"
-                : "bg-white text-gray-700 hover:bg-gray-100"
+              ? "border-primary bg-primary text-white"
+              : "bg-white text-gray-700 hover:bg-gray-100"
               }`}
           >
             {i + 1}

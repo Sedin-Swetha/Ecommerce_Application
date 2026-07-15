@@ -18,7 +18,7 @@ export default function LoginForm() {
         handleSubmit,
         formState: { errors, isSubmitting },
     } = useForm<LoginInput>({
-        resolver: zodResolver(loginSchema), 
+        resolver: zodResolver(loginSchema),
     });
     const onSubmit = async (data: LoginInput) => {
         setError("");
@@ -72,13 +72,13 @@ export default function LoginForm() {
                         </p>
                     )}
                 </div>
-                
+
                 {error && (
                     <div className="rounded-lg bg-red-50 dark:bg-red-900/30 p-3 text-sm text-red-600 dark:text-red-400">
                         {error}
                     </div>
                 )}
-                
+
                 <div className="pt-2">
                     <Button type="submit" disabled={isSubmitting} className="w-full py-3 text-sm sm:text-base font-semibold">
                         {isSubmitting ? "Signing In..." : "Login"}
@@ -87,8 +87,8 @@ export default function LoginForm() {
                 <div className="text-center pt-2 border-t border-gray-100 dark:border-gray-800">
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                         Don't have an account?{" "}
-                        <Link 
-                            href="/register" 
+                        <Link
+                            href="/register"
                             className="font-semibold text-primary hover:underline ml-1"
                         >
                             Register

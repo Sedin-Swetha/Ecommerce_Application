@@ -2,12 +2,10 @@
 import { useState, useRef, useEffect } from "react";
 import { useNotifications } from "@/hooks/Usenotifications";
 import NotificationItem from "@/components/notifications/NotificationItem";
-
 export default function NotificationBell() {
   const { notifications, unreadCount, markAsRead, markAllAsRead, clearAll } = useNotifications();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
@@ -15,7 +13,6 @@ export default function NotificationBell() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
   return (
     <div className="relative" ref={ref}>
       <button
@@ -33,7 +30,6 @@ export default function NotificationBell() {
           </span>
         )}
       </button>
-
       {open && (
         <div className="absolute right-0 top-full z-50 mt-2 w-80 overflow-hidden rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-lg">
           <div className="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 px-4 py-3">
@@ -44,7 +40,6 @@ export default function NotificationBell() {
               </button>
             )}
           </div>
-
           <div className="max-h-80 overflow-y-auto divide-y divide-gray-50 dark:divide-gray-800">
             {notifications.length === 0 ? (
               <p className="px-4 py-8 text-center text-sm text-gray-400">No notifications yet</p>
@@ -54,7 +49,6 @@ export default function NotificationBell() {
               ))
             )}
           </div>
-
           {notifications.length > 0 && (
             <button
               onClick={clearAll}

@@ -66,8 +66,8 @@ export default function WishlistItem({ product }: Props) {
 						onClick={() => addItem(product.id)}
 						disabled={inCart}
 						className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${inCart
-								? "bg-green-100 text-green-700 cursor-default"
-								: "bg-primary text-white hover:bg-primary-dark active:scale-95"
+							? "bg-green-100 text-green-700 cursor-default"
+							: "bg-primary text-white hover:bg-primary-dark active:scale-95"
 							}`}
 					>
 						{inCart ? "✓ In Cart" : "Add to Cart"}

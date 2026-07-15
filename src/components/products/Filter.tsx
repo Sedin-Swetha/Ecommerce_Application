@@ -41,9 +41,8 @@ function FilterSection({
                 </svg>
             </button>
             <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    isOpen ? "max-h-[400px] opacity-100 mt-3" : "max-h-0 opacity-0 mt-0"
-                }`}
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-[400px] opacity-100 mt-3" : "max-h-0 opacity-0 mt-0"
+                    }`}
             >
                 {children}
             </div>
