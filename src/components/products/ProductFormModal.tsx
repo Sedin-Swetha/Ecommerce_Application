@@ -44,6 +44,40 @@ export default function ProductFormModal({
     }
     setErrors({});
   }, [open, mode, initialData]);
+
+  useEffect(() => {
+    const name = form.name.toLowerCase();
+    
+    // Keyword to category mapping for smart auto-selection
+    const categoryMapping: Record<string, string> = {
+      // Electronics
+      phone: "CAT001", laptop: "CAT001", tv: "CAT001", camera: "CAT001",
+      // Fashion
+      shirt: "CAT002", dress: "CAT002", shoes: "CAT002", jeans: "CAT002",
+      // Daily Needs
+      ghee: "CAT003", milk: "CAT003", bread: "CAT003", rice: "CAT003", soap: "CAT003",
+      // Furniture
+      table: "CAT004", chair: "CAT004", sofa: "CAT004", bed: "CAT004", desk: "CAT004",
+      // Cookware
+      pan: "CAT005", pot: "CAT005", cooker: "CAT005", spatula: "CAT005",
+      // Beauty
+      lipstick: "CAT006", cream: "CAT006", perfume: "CAT006", makeup: "CAT006",
+    };
+
+    let matchedCategoryId = null;
+    for (const [keyword, catId] of Object.entries(categoryMapping)) {
+      // Use word boundary regex to avoid partial matches (e.g. "pan" in "pants")
+      const regex = new RegExp(`\\b${keyword}\\b`, 'i');
+      if (regex.test(name)) {
+        matchedCategoryId = catId;
+        break;
+      }
+    }
+
+    if (matchedCategoryId && form.categoryId !== matchedCategoryId) {
+      setForm((prev) => ({ ...prev, categoryId: matchedCategoryId as any }));
+    }
+  }, [form.name, form.categoryId]);
   function validate(): boolean {
     // Use Zod safeParse to validate the entire form at once
     const result = productSchema.safeParse(form);
