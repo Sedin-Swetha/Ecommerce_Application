@@ -1,6 +1,6 @@
 import "./globals.css";
 import Script from "next/script";
-import { JotaiProvider } from "@/components/providers/JotaiProvider";
+import { JotaiProvider } from "@/providers/JotaiProvider";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>

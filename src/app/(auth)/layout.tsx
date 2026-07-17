@@ -5,8 +5,7 @@ export default function AuthLayout({
 }) {
   return (
     <main
-      className="
-      flex
+      className="flex
       min-h-screen
       items-center
       justify-center

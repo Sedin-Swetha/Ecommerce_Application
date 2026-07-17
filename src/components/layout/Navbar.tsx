@@ -25,8 +25,6 @@ export default function Navbar() {
     useEffect(() => {
         setMounted(true);
     }, []);
-
-    // Auto-update category based on search query
     useEffect(() => {
         const query = searchQuery.toLowerCase();
 
@@ -229,16 +227,12 @@ export default function Navbar() {
                     />
                 </div>
             </div>
-            {/* Mobile Side Panel (Drawer) */}
             {isOpen && (
                 <div className="fixed inset-0 z-[60] flex md:hidden">
-                    {/* Backdrop */}
                     <div
                         className="fixed inset-0 bg-black/40 transition-opacity"
                         onClick={() => setIsOpen(false)}
                     />
-
-                    {/* Side Drawer */}
                     <div className="relative w-[80%] max-w-[300px] h-full bg-white text-slate-900 shadow-2xl flex flex-col dark:bg-slate-950 dark:text-gray-100">
                         <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200 dark:border-gray-800">
                             <span className="text-xl font-bold text-primary">Menu</span>
@@ -249,7 +243,6 @@ export default function Navbar() {
                                 ✕
                             </button>
                         </div>
-
                         <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-1 text-slate-900 dark:text-gray-100">
                             {user && (
                                 <div className="flex items-center gap-3 rounded-xl bg-gray-100 px-3 py-3 mb-4 dark:bg-slate-900">
@@ -266,13 +259,10 @@ export default function Navbar() {
                                     </div>
                                 </div>
                             )}
-
                             <Link href="/" onClick={() => setIsOpen(false)} className="rounded-lg px-3 py-2.5 font-medium text-slate-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-900">Home</Link>
                             <Link href="/products" onClick={() => setIsOpen(false)} className="rounded-lg px-3 py-2.5 font-medium text-slate-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-900">Products</Link>
                             <Link href="#categories" onClick={() => setIsOpen(false)} className="rounded-lg px-3 py-2.5 font-medium text-slate-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-900">Categories</Link>
-
                             <hr className="my-2 border-gray-200 dark:border-gray-800" />
-
                             {!isAdmin && (
                                 <>
                                     <Link href="/wishlist" onClick={() => setIsOpen(false)} className="flex items-center gap-3 rounded-lg px-3 py-2.5 font-medium text-slate-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-900">
@@ -285,7 +275,6 @@ export default function Navbar() {
                                         Cart
                                         {cartCount > 0 && <span className="ml-auto flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">{cartCount}</span>}
                                     </Link>
-
                                     <hr className="my-2 border-gray-200 dark:border-gray-800" />
                                 </>
                             )}
@@ -298,7 +287,6 @@ export default function Navbar() {
                                     <Link href="/orders" onClick={() => setIsOpen(false)} className="rounded-lg px-3 py-2.5 font-medium text-slate-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-900">
                                         {user.role === UserRole.ADMIN ? "All Orders" : "My Orders"}
                                     </Link>
-
                                     <div className="mt-4 pt-2">
                                         <button
                                             onClick={() => { setIsOpen(false); logout(); }}

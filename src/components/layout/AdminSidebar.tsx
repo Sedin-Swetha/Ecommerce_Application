@@ -54,7 +54,6 @@ const NAV_ITEMS = [
         ),
     },
     {
-        // FIXED: was href:"#" with comingSoon:true — now a real route that points to your built page
         label: "Analytics",
         href: "/admin/analytics",
         isActive: (pathname: string) => pathname.startsWith("/admin/analytics"),
