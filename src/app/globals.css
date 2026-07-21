@@ -1,26 +1,177 @@
 @import "tailwindcss";
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-vintage-grape-50);
+  --foreground: var(--color-vintage-grape-950);
+  --primary: var(--color-vintage-grape-500);
+  --primary-dark: var(--color-vintage-grape-600);
+  --secondary: var(--color-pearl-aqua-500);
+  --accent: var(--color-blush-pop-500);
+  --muted: var(--color-vintage-grape-400);
+  --card: #ffffff;
+  --border: var(--color-vintage-grape-200);
+  --text-muted: var(--color-vintage-grape-600);
 }
-
 @theme inline {
+  --color-vintage-grape-50: #f5f0f4;
+  --color-vintage-grape-100: #eae1ea;
+  --color-vintage-grape-200: #d5c3d5;
+  --color-vintage-grape-300: #c0a5bf;
+  --color-vintage-grape-400: #ab87aa;
+  --color-vintage-grape-500: #966995;
+  --color-vintage-grape-600: #785477;
+  --color-vintage-grape-700: #5a3f59;
+  --color-vintage-grape-800: #3c2a3c;
+  --color-vintage-grape-900: #1e151e;
+  --color-vintage-grape-950: #150f15;
+
+  --color-petal-pink-50: #f9ebf4;
+  --color-petal-pink-100: #f3d8e8;
+  --color-petal-pink-200: #e7b1d1;
+  --color-petal-pink-300: #db8abb;
+  --color-petal-pink-400: #cf63a4;
+  --color-petal-pink-500: #c33c8d;
+  --color-petal-pink-600: #9c3071;
+  --color-petal-pink-700: #752455;
+  --color-petal-pink-800: #4e1838;
+  --color-petal-pink-900: #270c1c;
+  --color-petal-pink-950: #1b0814;
+
+  --color-blush-pop-50: #f9ecf3;
+  --color-blush-pop-100: #f3d8e7;
+  --color-blush-pop-200: #e7b1d0;
+  --color-blush-pop-300: #da8bb8;
+  --color-blush-pop-400: #ce64a0;
+  --color-blush-pop-500: #c23d88;
+  --color-blush-pop-600: #9b316d;
+  --color-blush-pop-700: #742552;
+  --color-blush-pop-800: #4e1837;
+  --color-blush-pop-900: #270c1b;
+  --color-blush-pop-950: #1b0913;
+
+  --color-snow-50: #faebf2;
+  --color-snow-100: #f5d6e6;
+  --color-snow-200: #ebadcc;
+  --color-snow-300: #e085b3;
+  --color-snow-400: #d65c99;
+  --color-snow-500: #cc3380;
+  --color-snow-600: #a32966;
+  --color-snow-700: #7a1f4d;
+  --color-snow-800: #521433;
+  --color-snow-900: #290a1a;
+  --color-snow-950: #1d0712;
+
+  --color-pearl-aqua-50: #edf8f7;
+  --color-pearl-aqua-100: #dbf0ef;
+  --color-pearl-aqua-200: #b6e2e0;
+  --color-pearl-aqua-300: #92d3d0;
+  --color-pearl-aqua-400: #6dc5c0;
+  --color-pearl-aqua-500: #49b6b1;
+  --color-pearl-aqua-600: #3a928d;
+  --color-pearl-aqua-700: #2c6d6a;
+  --color-pearl-aqua-800: #1d4947;
+  --color-pearl-aqua-900: #0f2423;
+  --color-pearl-aqua-950: #0a1a19;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+@custom-variant dark (&:is(.dark *));
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root.dark {
+  --background: var(--color-vintage-grape-950);
+  --foreground: var(--color-vintage-grape-50);
+  --primary: var(--color-vintage-grape-300);
+  --primary-dark: var(--color-vintage-grape-400);
+  --card: var(--color-vintage-grape-900);
+  --border: var(--color-vintage-grape-800);
 }
-
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+:root {
+  color-scheme: light;
+}
+:root.dark {
+  color-scheme: dark;
+}
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+@layer base {
+  .dark .bg-white {
+    background-color: var(--card) !important;
+  }
+  .dark .bg-gray-50,
+  .dark .bg-slate-50,
+  .dark .bg-stone-50,
+  .dark .bg-zinc-50 {
+    background-color: var(--background) !important;
+  }
+  .dark .bg-gray-100,
+  .dark .bg-slate-100,
+  .dark .bg-stone-100,
+  .dark .bg-zinc-100 {
+    background-color: var(--card) !important;
+  }
+  .dark .border-gray-100,
+  .dark .border-slate-100,
+  .dark .border-stone-100,
+  .dark .border-zinc-100,
+  .dark .border-gray-200,
+  .dark .border-slate-200,
+  .dark .border-stone-200,
+  .dark .border-zinc-200 {
+    border-color: var(--border) !important;
+  }
+  .dark .text-gray-900,
+  .dark .text-gray-800,
+  .dark .text-gray-700,
+  .dark .text-gray-600,
+  .dark .text-gray-500,
+  .dark .text-gray-400,
+  .dark .text-gray-300,
+  .dark .text-gray-200,
+  .dark .text-gray-100 {
+    color: var(--foreground) !important;
+  }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused; 
+}
+.dark select {
+  color-scheme: dark;
+  background-color: var(--card);
+  color: var(--foreground);
+  border-color: var(--border);
+}
+
+.dark select option {
+  background-color: var(--card);
+  color: var(--foreground);
+}
+
+.dark input[type="radio"] {
+  accent-color: var(--primary);
 }
