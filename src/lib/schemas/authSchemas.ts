@@ -30,6 +30,6 @@ export const registerSchema = z.object({
         .string()
         .min(1, "Password is required")
         .min(6, "Password must be at least 6 characters"),
-    role: z.enum([UserRole.USER, UserRole.VENDOR]).default(UserRole.USER),
+    role: z.nativeEnum(UserRole),
 });
 export type RegisterInput = z.infer<typeof registerSchema>;
