@@ -19,6 +19,13 @@ export default function RegisterForm() {
         formState: { errors, isSubmitting },
     } = useForm<RegisterInput>({
         resolver: zodResolver(registerSchema),
+        defaultValues: {
+            name: "",
+            email: "",
+            phone: "",
+            password: "",
+            role: UserRole.USER,
+        },
     });
     const onSubmit = (data: RegisterInput) => {
         setError("");
