@@ -8,6 +8,7 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { useAuth } from "@/hooks/useAuth";
 import { registerSchema, RegisterInput } from "@/lib/schemas/authSchemas";
+import { UserRole } from "@/types/enums";
 export default function RegisterForm() {
     const router = useRouter();
     const { register: registerUser } = useAuth();
@@ -23,7 +24,6 @@ export default function RegisterForm() {
         setError("");
         try {
             registerUser(data);
-            router.push("/products");
         } catch (error) {
             setError(
                 error instanceof Error ? error.message : "Registration failed"
@@ -88,6 +88,18 @@ export default function RegisterForm() {
                             {errors.password.message}
                         </p>
                     )}
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Register As
+                    </label>
+                    <select
+                        {...register("role")}
+                        className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2.5 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                    >
+                        <option value={UserRole.USER}>Customer</option>
+                        <option value={UserRole.VENDOR}>Vendor</option>
+                    </select>
                 </div>
                 {error && (
                     <div className="rounded-lg bg-red-50 dark:bg-red-900/30 p-3 text-sm text-red-600 dark:text-red-400">

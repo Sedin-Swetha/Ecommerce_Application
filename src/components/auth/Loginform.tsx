@@ -23,12 +23,7 @@ export default function LoginForm() {
     const onSubmit = async (data: LoginInput) => {
         setError("");
         try {
-            const authenticatedUser = await login(data);
-            if (authenticatedUser.role === UserRole.ADMIN) {
-                router.push("/admin");
-            } else {
-                router.push("/products");
-            }
+            await login(data);
         } catch (error) {
             setError(
                 error instanceof Error ? error.message : "Login failed"

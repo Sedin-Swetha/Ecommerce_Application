@@ -11,12 +11,12 @@ import { sidebarCollapsedAtom } from "@/store/sidebarAtom";
 function AdminLayout({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
   const collapsed = useAtomValue(sidebarCollapsedAtom);
-  if (!user || user.role !== UserRole.ADMIN) return null;
+  if (!user || (user.role !== UserRole.ADMIN && user.role !== UserRole.VENDOR)) return null;
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+    <div className="flex flex-1 pt-16">
       <AdminSidebar user={user} />
       <main
-        className={`min-h-screen pt-14 md:pt-0 transition-all duration-300 ${
+        className={`flex-1 pt-14 md:pt-0 transition-all duration-300 ${
           collapsed ? "md:pl-16" : "md:pl-60"
         }`}
       >
@@ -35,20 +35,34 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
   }, []);
   const isStrictAdminRoute = pathname.startsWith("/admin");
   const isSharedAdminRoute = ["/products", "/categories", "/orders", "/users"].some(p => pathname.startsWith(p));
-  const showAdminLayout = isStrictAdminRoute || (mounted && user?.role === UserRole.ADMIN && isSharedAdminRoute);
+  
+  const isAdminOrVendor = user?.role === UserRole.ADMIN || user?.role === UserRole.VENDOR;
+  const isVendorRestrictedRoute = ["/users", "/categories"].some(p => pathname.startsWith(p));
+
+  const showAdminLayout = isStrictAdminRoute || (mounted && isAdminOrVendor && isSharedAdminRoute);
+  
   useEffect(() => {
+    if (mounted && user?.role === UserRole.VENDOR && isVendorRestrictedRoute) {
+      router.push("/admin");
+      return;
+    }
     if (!isStrictAdminRoute) return;
     if (mounted && !user) {
       router.push("/login?redirect=/admin");
       return;
     }
-    if (mounted && user?.role !== UserRole.ADMIN) {
+    if (mounted && !isAdminOrVendor) {
       router.push("/");
     }
-  }, [isStrictAdminRoute, user, router, mounted]);
+  }, [isStrictAdminRoute, user, router, mounted, isVendorRestrictedRoute, pathname]);
 
   if (showAdminLayout) {
-    return <AdminLayout>{children}</AdminLayout>;
+    return (
+      <div className="flex flex-col min-h-screen bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300">
+        <Navbar />
+        <AdminLayout>{children}</AdminLayout>
+      </div>
+    );
   }
   if (!mounted) {
     return null; 

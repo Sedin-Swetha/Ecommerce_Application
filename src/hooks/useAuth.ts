@@ -30,6 +30,8 @@ export const useAuth = () => {
         router.push(
             existingUser.role === UserRole.ADMIN
                 ? "/admin"
+                : existingUser.role === UserRole.VENDOR
+                ? "/admin"
                 : "/products"
         );
         return existingUser;
@@ -48,13 +50,13 @@ export const useAuth = () => {
             email: data.email,
             password: data.password,
             phone: data.phone,
-            role: UserRole.USER,
+            role: data.role || UserRole.USER,
             isBlocked: false,
             createdAt: new Date().toISOString(),
         };
         setUsers([...users, newUser]);
         setUser(newUser);
-        router.push("/products");
+        router.push(newUser.role === UserRole.VENDOR ? "/admin" : "/products");
         return newUser;
     };
     const updateProfile = (

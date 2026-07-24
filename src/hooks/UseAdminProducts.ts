@@ -4,6 +4,8 @@ import { useCallback } from "react";
 import { productsAtom } from "@/store/ProductAtom";
 import { AdminProductForm } from "@/types/admin";
 import { Product } from "@/types/product";
+import { useAuth } from "@/hooks/useAuth";
+import { UserRole } from "@/types/enums";
 import { STORAGE_KEYS } from "@/constants/StorageKeys";
 import { defaultProducts } from "@/data/products";
 function saveToStorage(products: Product[]): void {
@@ -15,7 +17,13 @@ function saveToStorage(products: Product[]): void {
     }
 }
 export function useAdminProducts() {
-    const [products, setProducts] = useAtom(productsAtom);
+    const { user } = useAuth();
+    const [globalProducts, setProducts] = useAtom(productsAtom);
+    
+    const products = user?.role === UserRole.VENDOR 
+        ? globalProducts.filter(p => p.vendorId === user.id)
+        : globalProducts;
+
     const syncUpdate = useCallback(
         (updater: (prev: Product[]) => Product[]) => {
             setProducts((prev) => {
@@ -31,13 +39,14 @@ export function useAdminProducts() {
             const newProduct: Product = {
                 ...form,
                 id: `PRD${Date.now()}`,
+                vendorId: user?.role === UserRole.VENDOR ? user.id : undefined,
                 rating: 0,
                 createdAt: new Date().toISOString(),
             };
             syncUpdate((prev) => [...prev, newProduct]);
             return newProduct;
         },
-        [syncUpdate]
+        [syncUpdate, user]
     );
     const updateProduct = useCallback(
         (id: string, form: Partial<AdminProductForm>): Product | null => {

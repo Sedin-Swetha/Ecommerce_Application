@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { UserRole } from "@/types/enums";
 export const loginSchema = z.object({
     email: z
         .string()
@@ -29,5 +30,6 @@ export const registerSchema = z.object({
         .string()
         .min(1, "Password is required")
         .min(6, "Password must be at least 6 characters"),
+    role: z.enum([UserRole.USER, UserRole.VENDOR]).default(UserRole.USER),
 });
 export type RegisterInput = z.infer<typeof registerSchema>;

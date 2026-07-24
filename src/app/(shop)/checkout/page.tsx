@@ -11,17 +11,22 @@ import { OrderItem, ShippingAddress, PaymentMethod, } from "@/types/order";
 import CheckoutForm from "@/components/checkout/CheckoutForm";
 import CheckoutSummary from "@/components/checkout/CheckoutSummary";
 import { Toast } from "@/components/ui/Toast";
+import { Coupon } from "@/types/coupon";
+import { couponsAtom } from "@/store/couponAtom";
 const SHIPPING_THRESHOLD = 999;
 export default function CheckoutPage() {
     const { user } = useAuth();
     const { cart, clearCart } = useCart();
     const { placeOrder } = useOrders();
     const products = useAtomValue(productsAtom);
+    const coupons = useAtomValue(couponsAtom);
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const [mounted, setMounted] = useState(false);
     const [showToast, setShowToast] = useState(false);
     const [isOrderPlaced, setIsOrderPlaced] = useState(false);
+    const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null);
+    const [couponError, setCouponError] = useState("");
     useEffect(() => {setMounted(true);}, []);
     useEffect(() => {
         if (!mounted) return;
@@ -67,7 +72,70 @@ export default function CheckoutPage() {
         0
     );
     const shippingCharge =subtotal >= SHIPPING_THRESHOLD ? 0 : 99;
-    const total = subtotal + shippingCharge;
+    
+    const calculateEligibleSubtotal = (coupon: Coupon) => {
+        if (coupon.vendorId) {
+            return orderItems
+                .filter(item => {
+                    const p = products.find(prod => prod.id === item.productId);
+                    return p?.vendorId === coupon.vendorId;
+                })
+                .reduce((sum, item) => sum + item.discountedPrice * item.quantity, 0);
+        } else if (coupon.categoryId) {
+            return orderItems
+                .filter(item => {
+                    const p = products.find(prod => prod.id === item.productId);
+                    return p?.categoryId === coupon.categoryId;
+                })
+                .reduce((sum, item) => sum + item.discountedPrice * item.quantity, 0);
+        }
+        return subtotal;
+    };
+
+    let couponDiscountValue = 0;
+    if (appliedCoupon) {
+        const eligible = calculateEligibleSubtotal(appliedCoupon);
+        // If cart changes making eligible 0, remove it silently (optional, but recalculation sets discount to 0)
+        if (appliedCoupon.type === "percent") {
+            couponDiscountValue = Math.floor((eligible * appliedCoupon.value) / 100);
+        } else {
+            couponDiscountValue = appliedCoupon.value;
+        }
+        if (couponDiscountValue > eligible) {
+            couponDiscountValue = eligible;
+        }
+    }
+    const total = subtotal - couponDiscountValue + shippingCharge;
+
+    const handleApplyCoupon = (code: string) => {
+        setCouponError("");
+        const coupon = coupons.find(c => c.code === code);
+        if (!coupon) {
+            setCouponError("Invalid coupon code.");
+            return;
+        }
+        
+        const eligible = calculateEligibleSubtotal(coupon);
+        if (eligible === 0) {
+            setCouponError("Coupon is not applicable to any items in your cart.");
+            return;
+        }
+        if (eligible < coupon.minOrderValue) {
+            setCouponError(`Eligible items must total at least ₹${coupon.minOrderValue}.`);
+            return;
+        }
+        if (coupon.type === "flat" && eligible < coupon.value) {
+            setCouponError(`Eligible items must total at least ₹${coupon.value} to use this flat discount.`);
+            return;
+        }
+        setAppliedCoupon(coupon);
+    };
+
+    const handleRemoveCoupon = () => {
+        setAppliedCoupon(null);
+        setCouponError("");
+    };
+
     const handlePlaceOrder = async (
         address: ShippingAddress,
         payment: PaymentMethod) => {
@@ -84,6 +152,8 @@ export default function CheckoutPage() {
                 subtotal,
                 shippingCharge,
                 total,
+                couponCode: appliedCoupon?.code,
+                couponDiscount: appliedCoupon ? couponDiscountValue : undefined,
             });
             if (!order || !order.id) {
                 throw new Error("Order creation failed");
@@ -117,6 +187,11 @@ export default function CheckoutPage() {
                         subtotal={subtotal}
                         shippingCharge={shippingCharge}
                         total={total}
+                        appliedCouponCode={appliedCoupon?.code}
+                        couponDiscountValue={couponDiscountValue}
+                        onApplyCoupon={handleApplyCoupon}
+                        onRemoveCoupon={handleRemoveCoupon}
+                        couponError={couponError}
                     />
                 </div>
             </div>

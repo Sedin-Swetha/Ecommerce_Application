@@ -37,11 +37,13 @@ export default function CategoryProducts() {
                         <div key={category.id}>
                             <div className="mb-4 flex items-center justify-between">
                                 <div className="flex items-center gap-2.5">
-                                    <img
-                                        src={category.image}
-                                        alt={category.name}
-                                        className="h-7 w-7 object-contain"
-                                    />
+                                    {category.image && (
+                                        <img
+                                            src={category.image}
+                                            alt={category.name}
+                                            className="h-7 w-7 object-contain"
+                                        />
+                                    )}
                                     <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">
                                         {category.name}
                                     </h2>
