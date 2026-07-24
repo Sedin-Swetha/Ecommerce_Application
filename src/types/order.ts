@@ -32,6 +32,8 @@ export interface Order {
   subtotal: number;     
   shippingCharge: number;
   total: number;
+  couponCode?: string;
+  couponDiscount?: number;
   status: OrderStatus;
   createdAt: string;
   updatedAt: string;

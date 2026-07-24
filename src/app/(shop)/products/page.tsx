@@ -16,7 +16,7 @@ function ProductsContent() {
   const { products, addProduct } = useAdminProducts();
   const [hasMounted, setHasMounted] = useState(false);
   useEffect(() => { setHasMounted(true); }, []);
-  const isAdmin = user?.role === UserRole.ADMIN;
+  const isAdminOrVendor = user?.role === UserRole.ADMIN || user?.role === UserRole.VENDOR;
   const search = searchParams.get("q") ?? "";
   const [category, setCategory]         = useState(() => searchParams.get("category") ?? "");
   const [brand, setBrand]               = useState("");
@@ -66,7 +66,7 @@ function ProductsContent() {
     <div className="mx-auto max-w-7xl px-4 py-6">
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Products</h1>
-        {hasMounted && isAdmin && (
+        {hasMounted && isAdminOrVendor && (
           <button
             onClick={() => setAddOpen(true)}
             className="flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-dark transition"
@@ -173,7 +173,7 @@ function ProductsContent() {
               ))}
             </div>
           ) : (
-            <ProductGrid products={visibleProducts} isAdmin={isAdmin}/>
+            <ProductGrid products={visibleProducts} isAdmin={isAdminOrVendor}/>
           )}
           {hasMounted && (
             hasMoreProducts ? (

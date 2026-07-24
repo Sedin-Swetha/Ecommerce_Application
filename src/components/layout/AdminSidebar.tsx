@@ -5,7 +5,9 @@ import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import { useAtom } from "jotai";
 import { sidebarCollapsedAtom } from "@/store/sidebarAtom";
-interface Props { user: { name: string; email: string }; }
+import { UserRole } from "@/types/enums";
+import { User } from "@/types/user";
+interface Props { user: User; }
 const NAV_ITEMS = [
     {
         label: "Dashboard",
@@ -50,6 +52,16 @@ const NAV_ITEMS = [
                 <rect x="9" y="3" width="6" height="4" rx="1" />
                 <line x1="9" y1="12" x2="15" y2="12" />
                 <line x1="9" y1="16" x2="13" y2="16" />
+            </svg>
+        ),
+    },
+    {
+        label: "Coupons",
+        href: "/admin/coupons",
+        isActive: (pathname: string) => pathname.startsWith("/admin/coupons"),
+        icon: (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z" />
             </svg>
         ),
     },
@@ -108,10 +120,19 @@ export default function AdminSidebar({ user }: Props) {
             )}
         </div>
     );
-    const Inner = ({ onNav }: { onNav?: () => void }) => (
+    const Inner = ({ onNav }: { onNav?: () => void }) => {
+        const isVendor = user.role === UserRole.VENDOR;
+        const filteredNavItems = NAV_ITEMS.filter(item => {
+            if (isVendor && (item.label === "Categories" || item.label === "Users")) {
+                return false;
+            }
+            return true;
+        });
+
+        return (
         <div className="flex h-full flex-col">
             <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-3 py-4">
-                {NAV_ITEMS.map((item) => {
+                {filteredNavItems.map((item) => {
                     const active = item.isActive(pathname);
                     return (
                         <Link
@@ -145,7 +166,7 @@ export default function AdminSidebar({ user }: Props) {
                         </div>
                         <div className="min-w-0">
                             <p className="truncate text-sm font-semibold text-gray-100">{user.name}</p>
-                            <p className="text-[10px] text-gray-400">Administrator</p>
+                            <p className="text-[10px] text-gray-400 uppercase">{user.role}</p>
                         </div>
                     </div>
                 )}
@@ -177,13 +198,14 @@ export default function AdminSidebar({ user }: Props) {
                 </button>
             </div>
         </div>
-    );
+        );
+    };
     function SidebarBody({ onNav }: { onNav?: () => void }) {
         return <Inner onNav={onNav} />;
     }
     return (
         <>
-            <div className="fixed left-0 right-0 top-0 z-50 flex h-14 items-center justify-between border-b border-gray-800 bg-slate-950 px-4 md:hidden">
+            <div className="fixed left-0 right-0 top-16 z-40 flex h-14 items-center justify-between border-b border-gray-800 bg-slate-950 px-4 md:hidden">
                 <Logo small />
                 <span className="text-sm font-bold text-gray-100">Admin Panel</span>
                 <button
@@ -200,12 +222,12 @@ export default function AdminSidebar({ user }: Props) {
             </div>
             {mobileOpen && (
                 <div
-                    className="fixed inset-0 z-50 bg-black/40 md:hidden"
+                    className="fixed inset-0 top-16 z-40 bg-black/40 md:hidden"
                     onClick={() => setMobileOpen(false)}
                 />
             )}
             <aside
-                className={`fixed left-0 top-0 z-50 flex h-full w-64 flex-col border-r border-gray-800 bg-slate-950 shadow-black/20 transition-transform duration-300 md:hidden ${mobileOpen ? "translate-x-0" : "-translate-x-full"
+                className={`fixed left-0 top-16 z-40 flex h-[calc(100vh-4rem)] w-64 flex-col border-r border-gray-800 bg-slate-950 shadow-black/20 transition-transform duration-300 md:hidden ${mobileOpen ? "translate-x-0" : "-translate-x-full"
                     }`}
             >
                 <div className="flex h-14 items-center justify-between border-b border-gray-800 px-4">
@@ -223,7 +245,7 @@ export default function AdminSidebar({ user }: Props) {
                 <SidebarBody onNav={() => setMobileOpen(false)} />
             </aside>
             <aside
-                className={`fixed left-0 top-0 z-40 hidden h-full flex-col border-r border-gray-800 bg-slate-950 shadow-black/10 transition-all duration-300 md:flex ${collapsed ? "w-16" : "w-60"
+                className={`fixed left-0 top-16 z-40 hidden h-[calc(100vh-4rem)] flex-col border-r border-gray-800 bg-slate-950 shadow-black/10 transition-all duration-300 md:flex ${collapsed ? "w-16" : "w-60"
                     }`}
             >
                 <div className={`flex h-16 items-center border-b border-gray-800 px-3 ${collapsed ? "justify-center" : "justify-between"}`}>

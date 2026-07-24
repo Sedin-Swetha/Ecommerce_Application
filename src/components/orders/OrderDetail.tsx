@@ -170,6 +170,12 @@ export default function OrderDetail({ order }: Props) {
                                     {order.shippingCharge === 0 ? "FREE" : `₹${order.shippingCharge}`}
                                 </span>
                             </div>
+                            {order.couponCode && order.couponDiscount && (
+                                <div className="flex justify-between text-sm font-medium text-blue-600">
+                                    <span>Coupon ({order.couponCode})</span>
+                                    <span>− ₹{order.couponDiscount.toLocaleString("en-IN")}</span>
+                                </div>
+                            )}
                             <div className="my-1 h-px bg-gray-100" />
                             <div className="flex justify-between text-base font-bold text-gray-900">
                                 <span>Total</span>

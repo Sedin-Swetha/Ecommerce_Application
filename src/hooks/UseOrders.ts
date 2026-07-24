@@ -19,6 +19,8 @@ export function useOrders() {
         subtotal: number;
         shippingCharge: number;
         total: number;
+        couponCode?: string;
+        couponDiscount?: number;
     }): Order => {
         const createdAt = new Date();
         const expectedDeliveryDate = new Date(createdAt);

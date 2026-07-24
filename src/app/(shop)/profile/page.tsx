@@ -120,7 +120,7 @@ export default function ProfilePage() {
                 ? "bg-violet-100 text-violet-700"
                 : "bg-gray-100 text-gray-600"
             }`}>
-              {user.role === UserRole.ADMIN ? "Admin" : "User"}
+              {user.role === UserRole.ADMIN ? "Admin" : user.role === UserRole.VENDOR ? "Vendor" : "User"}
             </span>
           </div>
         </div>

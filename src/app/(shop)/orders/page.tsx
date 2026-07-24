@@ -10,7 +10,7 @@ export default function OrdersPage() {
 	const { user } = useAuth();
 	const router = useRouter();
 	const [mounted, setMounted] = useState(false);
-	const isAdmin = user?.role === UserRole.ADMIN;
+	const isAdminOrVendor = user?.role === UserRole.ADMIN || user?.role === UserRole.VENDOR;
 	useEffect(() => {
 		setMounted(true);
 	}, []);
@@ -27,7 +27,7 @@ export default function OrdersPage() {
 		);
 	}
 	if (!user) return null;
-	if (isAdmin) {
+	if (isAdminOrVendor) {
 		return (
 			<div className="mx-auto max-w-5xl px-4 py-10">
 				<h1 className="mb-6 text-2xl font-bold text-gray-900">All Orders</h1>

@@ -4,6 +4,7 @@ export interface Product {
   name: string;
   description: string;
   categoryId: CategoryId ;
+  vendorId?: string;
   brand: string;
   price: number;
   discount: number;

@@ -24,3 +24,6 @@ export const searchProductsAtom = atomFamily((query: string) =>
 export const productByIdAtom = atomFamily((id: string) =>
 	atom((get) => get(productsAtom).find((p) => p.id === id) ?? null)
 );
+export const vendorProductsAtom = atomFamily((vendorId: string) =>
+	atom((get) => get(productsAtom).filter((p) => p.vendorId === vendorId))
+);
