@@ -33,3 +33,4 @@ export const registerSchema = z.object({
     role: z.nativeEnum(UserRole),
 });
 export type RegisterInput = z.infer<typeof registerSchema>;
+export type RegisterFormInput = z.input<typeof registerSchema>;
