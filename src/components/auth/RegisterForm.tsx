@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { useAuth } from "@/hooks/useAuth";
-import { registerSchema, RegisterInput } from "@/lib/schemas/authSchemas";
+import { registerSchema, RegisterInput, RegisterFormInput } from "@/lib/schemas/authSchemas";
 import { UserRole } from "@/types/enums";
 export default function RegisterForm() {
     const router = useRouter();
@@ -17,7 +17,7 @@ export default function RegisterForm() {
         register,
         handleSubmit,
         formState: { errors, isSubmitting },
-    } = useForm<RegisterInput>({
+    } = useForm<RegisterFormInput, any, RegisterInput>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
             name: "",
